@@ -5,11 +5,8 @@ namespace SporeMan.Console;
 
 class Program {
     public static void Main(string[] args) {
-        AudioPlayer.Play(Path.Join("assets", "audio", "sfx", "random.wav"));
-        AudioPlayer.OnPlayDone += (file) => System.Console.WriteLine($"Done {file}");
-        AnsiConsole.MarkupLine("[#080]Spore[/]Man");
-        var input = System.Console.ReadKey(true);
-        System.Console.WriteLine($"Bye, {input.KeyChar}!");
-        Thread.Sleep(1000);
+        AnsiConsole.MarkupLine("[#0f8]Spore[/]Man");
+        AnsiConsole.MarkupLine("Press any key to start a new game.");
+        System.Console.ReadKey();
     }
 }
