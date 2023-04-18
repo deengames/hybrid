@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>Sporeman</title>
+    </head>
+    <body>
+        <input id="playerInput" type="text" onkeyup="onInput()">Enter commands here</input>
+        
+        <div id="output" aria-live="polite">
+
+        </div>
+        
+        <script type="text/javascript">
+            var input = document.getElementById("playerInput");
+            var output = document.getElementById("output");
+            output.innerHTML = "Sporeman. Type new to start a new game.";
+
+            input.focus();
+
+            function onInput()
+            {
+                var text = input.value.toLowerCase();
+                if (text == "new") {
+                    output.innerHTML = "You are SPORE MAN, nanananan SPORE MAN";
+                }
+            }
+
+        </script>
+    </body>
+</html>
