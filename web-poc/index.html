@@ -1,29 +1,38 @@
 <html>
     <head>
-        <title>Sporeman</title>
+        <title>Spore Man</title>
     </head>
     <body>
-        <input id="playerInput" type="text" onkeyup="onInput()">Enter commands here</input>
-        
-        <div id="output" aria-live="polite">
-
+        <div>
+           <input id="playerInput" type="text" onkeyup="onInput()" tabindex="0" aria-label="enter commands here">Enter commands here</input>
         </div>
+
+        <div id="output" aria-live="polite" tabindex="0" aria-label="output goes here"></div>
         
         <script type="text/javascript">
             var input = document.getElementById("playerInput");
             var output = document.getElementById("output");
-            output.innerHTML = "Sporeman. Type new to start a new game.";
-
             input.focus();
+            showAndSay("<h1>Spore Man</h1>", "Welcome to Spore Man. Type new to start a new game.");
 
             function onInput()
             {
                 var text = input.value.toLowerCase();
                 if (text == "new") {
-                    output.innerHTML = "You are SPORE MAN, nanananan SPORE MAN";
+                    showAndSay("na na na na na na na NEW GAME!");
                 }
             }
-
+            
+            function showAndSay(html, text) {
+                //Reset the div. Otherwise, repeat announcements will not trigger on iOS.
+                output.innerHTML = "";
+                output.ariaLabel = "";
+                //Reset the div. Otherwise, repeat announcements will not trigger on iOS.
+                setTimeout(() => {
+                    output.innerHTML = html;
+                    output.ariaLabel = text || html;
+                }, 160);
+            }
         </script>
     </body>
 </html>
