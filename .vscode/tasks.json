@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/source/SporeMan.Console/SporeMan.Console.csproj",
+                "${workspaceFolder}/source/Hybrid.Console/Hybrid.Console.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/source/SporeMan.Console/SporeMan.Console.csproj",
+                "${workspaceFolder}/source/Hybrid.Console/Hybrid.Console.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/source/SporeMan.Console/SporeMan.Console.csproj"
+                "${workspaceFolder}/source/Hybrid.Console/Hybrid.Console.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
