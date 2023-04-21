@@ -18,6 +18,11 @@ class Game
 
     public void Run()
     {
+        // Can we change the default, pretty please?
+        // Best practice of Spectre: assume background is not black
+        Console.BackgroundColor = ConsoleColor.Black;
+        Console.ForegroundColor = ConsoleColor.White;
+        
         while (currentScene != null)
         {
             currentScene.Show();
