@@ -1,9 +1,11 @@
+using Hybrid.Console.Character;
+using Hybrid.Console.Interfaces;
 using Hybrid.Console.IO;
 using Spectre.Console;
 
 namespace Hybrid.Console.Story;
 
-class StoryScene
+class StoryScene : IScene
 {
     public void Show()
     {
@@ -14,5 +16,7 @@ class StoryScene
         AnsiConsole.MarkupLine("\"Report back when you've found and killed the queen,\" he says. Without waiting for a reply, he stabs the ejection button, and you hurtle toward the planetoid.");
         AnsiConsole.MarkupLine($"A short while later, you clamber out of the pod, stretching for the first time. You feel ... [{Colours.ThemeHighlight}]strange. Stronger. Faster.[/] You remember your briefing, and quickly identify and climb down the NIM-3 crater and into the first layer beneath the surface.");
         System.Console.ReadKey(true);
+
+        Program.ChangeScene(new SkillSelectScene());
     }
 }
