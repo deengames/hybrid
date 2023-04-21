@@ -22,8 +22,11 @@ class SkillSelectScene : IScene
         ShowIntro(player.SkillPoints);
         ShowCurrentSkills(player.Skills);
         ListUnlearnedSkills();
+
         var toLearn = AskWhichSkillToLearn();
-        AnsiConsole.Write($"YOU LEARNED: {toLearn.Name}!!!!");
+        player.Learn(toLearn);
+        AnsiConsole.MarkupLine($"Your genes reconfigure themselves. [{Colours.ThemeHighlight}]You learn {toLearn.Name}.[/]");
+        
         System.Console.ReadKey(true);
         Game.Instance.End();
     }
@@ -32,11 +35,22 @@ class SkillSelectScene : IScene
     {
         var input = "";
         int selection = 0;
+        var allData = PlayerSkillsData.AllSkills;
+
         while (selection <= 0 || selection > unlearnedSkills.Count())
         {
             AnsiConsole.Write("Enter the number of the skill to learn: ");
             input = Console.ReadLine();
             int.TryParse(input, System.Globalization.NumberStyles.Integer, null, out selection);
+
+            if (selection > 0 && selection <= unlearnedSkills.Count()) {
+                var selected = allData.Single(s => s.Name == unlearnedSkills.ElementAt(selection - 1).Name);
+                if (selected.LearningCost > Game.Instance.Player.SkillPoints)
+                {
+                    AnsiConsole.WriteLine($"You don't have enough points to learn {selected.Name}.");
+                    selection = 0;
+                }
+            }
         }
 
         return unlearnedSkills.ElementAt(selection - 1);

@@ -1,4 +1,5 @@
 using Hybrid.Core.Character;
+using Hybrid.Core.Data.Skills;
 using NUnit.Framework;
 
 namespace Hybrid.Core.UnitTests.Character;
@@ -22,19 +23,20 @@ public class PlayerTests
         var player = new Player();
 
         // Act/Assert
-        Assert.True(player.Learn("Fireball"));
-        Assert.True(player.Learn("Bubble Shield"));
-        Assert.True(player.Learn("Zygomatic Brain"));
+        Assert.True(player.Learn(PlayerSkillsData.AllSkills.ElementAt(0)));
+        Assert.True(player.Learn(PlayerSkillsData.AllSkills.ElementAt(1)));
+        Assert.True(player.Learn(PlayerSkillsData.AllSkills.ElementAt(2)));
     }
 
     [Test]
     public void Learn_ReturnsFalse_ForPreviouslyLearnedSkills()
     {
         // Arrange
+        var skill = PlayerSkillsData.AllSkills.ElementAt(3);
         var player = new Player();
-        player.Learn("Thunder Spikes");
+        player.Learn(skill);
 
         // Act/Assert
-        Assert.False(player.Learn("Thunder Spikes"));
+        Assert.False(player.Learn(skill));
     }
 }
