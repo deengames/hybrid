@@ -1,8 +1,8 @@
-﻿using Hybrid.Console.Interfaces;
-using Hybrid.Console.Story;
+﻿using Hybrid.Game.Interfaces;
+using Hybrid.Game.Story;
 using Spectre.Console;
 
-namespace Hybrid.Console;
+namespace Hybrid.Game;
 
 class Program {
 

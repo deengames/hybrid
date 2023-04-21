@@ -1,4 +1,4 @@
-namespace Hybrid.Console.Interfaces;
+namespace Hybrid.Game.Interfaces;
 
 interface IScene
 {

@@ -1,8 +1,8 @@
-using Hybrid.Console.Interfaces;
-using Hybrid.Console.IO;
+using Hybrid.Game.Interfaces;
+using Hybrid.Game.IO;
 using Spectre.Console;
 
-namespace Hybrid.Console.Story
+namespace Hybrid.Game.Story
 {
     class TitleScene : IScene
     {

@@ -1,6 +1,6 @@
-using Hybrid.Console.Interfaces;
+using Hybrid.Game.Interfaces;
 
-namespace Hybrid.Console.Character;
+namespace Hybrid.Game.Character;
 
 class SkillSelectScene : IScene
 {

@@ -1,4 +1,4 @@
-namespace Hybrid.Console.IO;
+namespace Hybrid.Game.IO;
 
 static class Colours
 {

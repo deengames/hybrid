@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/source/Hybrid.Console/bin/Debug/net6.0/Hybrid.Console.dll",
+            "program": "${workspaceFolder}/source/Hybrid.Game/bin/Debug/net6.0/Hybrid.Game.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/source/Hybrid.Console",
+            "cwd": "${workspaceFolder}/source/Hybrid.Game",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "integratedTerminal",
             "stopAtEntry": false
