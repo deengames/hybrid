@@ -12,7 +12,7 @@ namespace Hybrid.Game.Story
             AnsiConsole.MarkupLine("Press any key to start a new game.");
             System.Console.ReadKey(true);
 
-            Program.ChangeScene(new StoryScene());
+            Game.Instance.ChangeScene(new StoryScene());
         }
     }
 }

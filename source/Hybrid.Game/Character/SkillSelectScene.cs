@@ -8,6 +8,6 @@ class SkillSelectScene : IScene
     {
         System.Console.WriteLine("Hello, world.");
         System.Console.ReadKey(true);
-        Program.EndGame();
+        Game.Instance.End();
     }
 }

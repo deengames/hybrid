@@ -17,6 +17,6 @@ class StoryScene : IScene
         AnsiConsole.MarkupLine($"A short while later, you clamber out of the pod, stretching for the first time. You feel ... [{Colours.ThemeHighlight}]strange. Stronger. Faster.[/] You remember your briefing, and quickly identify and climb down the NIM-3 crater and into the first layer beneath the surface.");
         System.Console.ReadKey(true);
 
-        Program.ChangeScene(new SkillSelectScene());
+        Game.Instance.ChangeScene(new SkillSelectScene());
     }
 }
