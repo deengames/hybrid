@@ -32,7 +32,7 @@ public static class PlayerSkillsData
         {
             Name = "Stinger",
             Species = "Vespidae", // wasp
-            Effect = "Each attack inflicts venom. Amount increases with level",
+            Effect = "Each attack inflicts venom. Amount increases per level",
             Description = "Tiny stringers from the Lunartata wasps cover your arms and hands",
             LearningCost = 2,
         },
