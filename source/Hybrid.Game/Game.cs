@@ -5,11 +5,11 @@ namespace Hybrid.Game;
 
 class Game
 {
-    public static Game Instance { get; private set; }
+    public static Game Instance { get; private set; } = new Game();
 
     internal IScene? currentScene = new TitleScene();
 
-    public Game()
+    private Game()
     {
         Game.Instance = this;
     }
