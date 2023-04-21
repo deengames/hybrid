@@ -40,8 +40,8 @@ public static class PlayerSkillsData
         {
             Name = "Blood Horn",
             Species = "Culicidae", // mosquito,
-            Effect = "Absorb health each time you kill a monster",
-            Description = "Sprouts a proboscis from your head which you can use to feast on the dead",
+            Effect = "Adds an extra attack that heals you and poisons monsters",
+            Description = "Sprout a long, thin proboscis from your forehad",
             LearningCost = 2,
         },
         new SkillData
