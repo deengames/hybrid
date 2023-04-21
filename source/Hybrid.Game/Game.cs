@@ -1,3 +1,4 @@
+using Hybrid.Core.Character;
 using Hybrid.Game.Interfaces;
 using Hybrid.Game.Story;
 
@@ -7,6 +8,7 @@ class Game
 {
     public static Game Instance { get; private set; } = new Game();
 
+    internal Player Player = new Player();
     internal IScene? currentScene = new TitleScene();
 
     private Game()
