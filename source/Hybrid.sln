@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hybrid.Game", "Hybrid.Game\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hybrid.Core", "Hybrid.Core\Hybrid.Core.csproj", "{4BE2FCFF-B68E-45A1-93F6-1E429244C7EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hybrid.Core.UnitTests", "Hybrid.Core.UnitTests\Hybrid.Core.UnitTests.csproj", "{B233361A-378B-4893-8811-1ADE10B13710}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{4BE2FCFF-B68E-45A1-93F6-1E429244C7EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BE2FCFF-B68E-45A1-93F6-1E429244C7EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BE2FCFF-B68E-45A1-93F6-1E429244C7EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B233361A-378B-4893-8811-1ADE10B13710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B233361A-378B-4893-8811-1ADE10B13710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B233361A-378B-4893-8811-1ADE10B13710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B233361A-378B-4893-8811-1ADE10B13710}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
