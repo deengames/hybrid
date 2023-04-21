@@ -21,10 +21,17 @@ class SkillSelectScene : IScene
 
     private void ListUnlearnedSkills(string[] skills)
     {
-        var unlearnedSkills = PlayerSkillsData.AllSkills.ExceptBy(skills, s => s.Name);
+        var unlearnedSkills = PlayerSkillsData.GetUnlearnedSkills(skills);
+        var previousSpecies = "";
+
         foreach (var unlearned in unlearnedSkills)
         {
-            AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]{unlearned.Name}[/] ({unlearned.LearningCost} points): {unlearned.Description}. [{Colours.ThemeHighlight}]{unlearned.Effect}[/].");
+            if (unlearned.Species != previousSpecies)
+            {
+                previousSpecies = unlearned.Species;
+                AnsiConsole.MarkupLine($"Species: [{Colours.ThemeHighlight}]{unlearned.Species}[/]");
+            }
+            AnsiConsole.MarkupLine($"  [{Colours.ThemeHighlight}]{unlearned.Name}[/] ({unlearned.LearningCost} points): {unlearned.Description}. [{Colours.ThemeHighlight}]{unlearned.Effect}[/].");
         }
     }
 
