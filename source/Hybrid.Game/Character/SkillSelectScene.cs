@@ -1,3 +1,4 @@
+using Hybrid.Core.Character;
 using Hybrid.Core.Data.Skills;
 using Hybrid.Game.Interfaces;
 using Hybrid.Game.IO;
@@ -22,16 +23,23 @@ class SkillSelectScene : IScene
         ShowIntro(player.SkillPoints);
         ShowCurrentSkills(player.Skills);
         ListUnlearnedSkills();
+        SkillData? toLearn = null;
 
-        var toLearn = AskWhichSkillToLearn();
-        player.Learn(toLearn);
-        AnsiConsole.MarkupLine($"Your genes reconfigure themselves. [{Colours.ThemeHighlight}]You learn {toLearn.Name}.[/]");
-        
+        do
+        {
+            toLearn = AskWhichSkillToLearn();
+            if (toLearn.HasValue) {
+                player.Learn(toLearn.Value);
+                AnsiConsole.MarkupLine($"Your genes reconfigure themselves. [{Colours.ThemeHighlight}]You learn {toLearn.Value.Name}.[/]");
+            }
+        } while (toLearn.HasValue);
+
+        AnsiConsole.WriteLine("You descend past the cusp of NIM-3 and into the first subterranean layer.");
         System.Console.ReadKey(true);
         Game.Instance.End();
     }
 
-    private SkillData AskWhichSkillToLearn()
+    private SkillData? AskWhichSkillToLearn()
     {
         var input = "";
         int selection = 0;
@@ -39,8 +47,14 @@ class SkillSelectScene : IScene
 
         while (selection <= 0 || selection > unlearnedSkills.Count())
         {
-            AnsiConsole.Write("Enter the number of the skill to learn: ");
+            AnsiConsole.Write("Enter the number of the skill to learn, or enter to start the game: ");
             input = Console.ReadLine();
+            
+            if (!input.Any())
+            {
+                return null;
+            }
+
             int.TryParse(input, System.Globalization.NumberStyles.Integer, null, out selection);
 
             if (selection > 0 && selection <= unlearnedSkills.Count()) {
@@ -48,6 +62,10 @@ class SkillSelectScene : IScene
                 if (selected.LearningCost > Game.Instance.Player.SkillPoints)
                 {
                     AnsiConsole.WriteLine($"You don't have enough points to learn {selected.Name}.");
+                    selection = 0;
+                } else if (Game.Instance.Player.Skills.Any(s => s == selected.Name))
+                {
+                    AnsiConsole.WriteLine($"You already assimilated {selected.Name}.");
                     selection = 0;
                 }
             }

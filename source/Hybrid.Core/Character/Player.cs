@@ -4,7 +4,7 @@ namespace Hybrid.Core.Character;
 
 public class Player
 {
-    public int SkillPoints { get; private set; } = 1;
+    public int SkillPoints { get; private set; } = 5;
     public string[] Skills { get { return _skills.ToArray(); } }
 
     private List<string> _skills = new List<string>();
