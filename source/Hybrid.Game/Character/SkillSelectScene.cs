@@ -1,5 +1,6 @@
-using Hybrid.Core.Character;
 using Hybrid.Core.Data.Skills;
+using Hybrid.Core.Dungeon;
+using Hybrid.Game.Dungeon;
 using Hybrid.Game.Interfaces;
 using Hybrid.Game.IO;
 using Spectre.Console;
@@ -34,9 +35,11 @@ class SkillSelectScene : IScene
             }
         } while (toLearn.HasValue);
 
-        AnsiConsole.WriteLine("You descend past the cusp of NIM-3 and into the first subterranean layer.");
+
+        var currentFloor = FloorGenerator.Generate(1);
+        AnsiConsole.WriteLine("You descend past the cusp of NIM-3 and into the first subterranean layer. (Press any key.)");
         System.Console.ReadKey(true);
-        Game.Instance.End();
+        Game.Instance.ChangeScene(new ExploreFloorScene(currentFloor));
     }
 
     private SkillData? AskWhichSkillToLearn()
@@ -87,13 +90,13 @@ class SkillSelectScene : IScene
                 previousSpecies = unlearned.Species;
                 AnsiConsole.MarkupLine($"Species: [{Colours.ThemeHighlight}]{unlearned.Species}[/]");
             }
-            AnsiConsole.MarkupLine($"  {i + 1}: [{Colours.ThemeHighlight}]{unlearned.Name}[/] ({unlearned.LearningCost} points): {unlearned.Description}. [{Colours.ThemeHighlight}]{unlearned.Effect}[/].");
+            AnsiConsole.MarkupLine($"  {i + 1}: [{Colours.ThemeDark}]{unlearned.Name}[/] ({unlearned.LearningCost} points): {unlearned.Description}. [{Colours.ThemeHighlight}]{unlearned.Effect}[/].");
         }
     }
 
     private void ShowIntro(int skillPoints)
     {
-        AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]Choose your skills.[/] You have [{Colours.ThemeHighlight}]{skillPoints}[/] skill points.\n");
+        AnsiConsole.MarkupLine($"[{Colours.ThemeDark}]Choose your skills.[/] You have [{Colours.ThemeHighlight}]{skillPoints}[/] skill points.\n");
     }
 
     private void ShowCurrentSkills(string[] skills)

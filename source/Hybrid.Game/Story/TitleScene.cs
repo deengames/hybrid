@@ -8,7 +8,7 @@ namespace Hybrid.Game.Story
     {
         public void Show()
         {
-            AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]Hyb[/]rid");
+            AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]Hyb[/][{Colours.ThemeDark}]rid[/]");
             AnsiConsole.MarkupLine("Press any key to start a new game.");
             System.Console.ReadKey(true);
 

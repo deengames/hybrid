@@ -7,7 +7,7 @@ public static class FloorGenerator
 
     private static readonly Random random = new Random();
 
-    public static Floor Generate()
+    public static Floor Generate(int floorNumber)
     {
         var rooms = new Room[RoomsWide, RoomsHigh];
         for (int y = 0; y < RoomsHigh; y++)
@@ -40,6 +40,7 @@ public static class FloorGenerator
             connected.Add(target);
             current = target;
         }
-        return new Floor(rooms, rooms[startX, startY]);
+
+        return new Floor(rooms, rooms[startX, startY], floorNumber);
     }
 }
