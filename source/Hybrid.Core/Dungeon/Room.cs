@@ -6,12 +6,12 @@ namespace Hybrid.Core.Dungeon;
 public class Room
 {
     // monsters go in here
-    public Room? Up = null;
-    public Room? Right = null;
-    public Room? Down = null;
-    public Room? Left = null;
+    public Room? North = null;
+    public Room? East = null;
+    public Room? South = null;
+    public Room? West = null;
     public int X = -1;
-    public int Y = 0;
+    public int Y = -1;
 
     public Room(int x, int y)
     {
@@ -50,24 +50,24 @@ public class Room
     {
         if (this.X < target.X)
         {
-            this.Right = target;
-            target.Left = this;
+            this.East = target;
+            target.West = this;
         }
         else if (this.X > target.X)
         {
-            this.Left = target;
-            target.Right = this;
+            this.West = target;
+            target.East = this;
         }
 
         if (this.Y < target.Y)
         {
-            this.Down = target;
-            target.Up = this;
+            this.South = target;
+            target.North = this;
         }
         else if (this.Y > target.Y)
         {
-            this.Up = target;
-            target.Down = this;
+            this.North = target;
+            target.South = this;
         }
     }
 }

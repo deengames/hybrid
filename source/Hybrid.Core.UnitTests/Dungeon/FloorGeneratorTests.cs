@@ -29,24 +29,24 @@ class FloorGeneratorTests
                 {
                     // Basic connection check for isolated rooms
                     var current = actual.Rooms[x, y];
-                    Assert.That(current.Left != null || current.Right != null || current.Down != null || current.Up != null);
+                    Assert.That(current.West != null || current.East != null || current.South != null || current.North != null);
 
                     // Fully connected
-                    if (current.Left != null && !connectedRooms.Contains(current.Left))
+                    if (current.West != null && !connectedRooms.Contains(current.West))
                     {
-                        connectedRooms.Add(current.Left);
+                        connectedRooms.Add(current.West);
                     }
-                    if (current.Right != null && !connectedRooms.Contains(current.Right))
+                    if (current.East != null && !connectedRooms.Contains(current.East))
                     {
-                        connectedRooms.Add(current.Right);
+                        connectedRooms.Add(current.East);
                     }
-                    if (current.Up != null && !connectedRooms.Contains(current.Up))
+                    if (current.North != null && !connectedRooms.Contains(current.North))
                     {
-                        connectedRooms.Add(current.Up);
+                        connectedRooms.Add(current.North);
                     }
-                    if (current.Down != null && !connectedRooms.Contains(current.Down))
+                    if (current.South != null && !connectedRooms.Contains(current.South))
                     {
-                        connectedRooms.Add(current.Down);
+                        connectedRooms.Add(current.South);
                     }
                 }
             }

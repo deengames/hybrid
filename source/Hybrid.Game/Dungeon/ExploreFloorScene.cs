@@ -16,7 +16,27 @@ class ExploreFloorScene : IScene
 
     public void Show()
     {
-        AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]You are on floor {_currentFloor.FloorNumber}[/] [{Colours.ThemeDark}]in room ({_currentFloor.StartRoom.X}, {_currentFloor.StartRoom.Y}).[/]");
+        var currentRoom = _currentFloor.StartRoom;
+
+        AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]You are on floor {_currentFloor.FloorNumber}[/] [{Colours.ThemeDark}]in room ({currentRoom.X}, {currentRoom.Y}).[/]");
+
+        AnsiConsole.MarkupLine($"Exits:");
+        if (currentRoom.North != null)
+        {
+            AnsiConsole.MarkupLine($"  [{Colours.ThemeDark}]North[/]");
+        }
+        if (currentRoom.East != null)
+        {
+            AnsiConsole.MarkupLine($"  [{Colours.ThemeDark}]East[/]");
+        }
+        if (currentRoom.South != null)
+        {
+            AnsiConsole.MarkupLine($"  [{Colours.ThemeDark}]South[/]");
+        }
+        if (currentRoom.West != null)
+        {
+            AnsiConsole.MarkupLine($"  [{Colours.ThemeDark}]West[/]");
+        }
 
         Game.Instance.End();
     }
