@@ -70,4 +70,28 @@ public class Room
             target.South = this;
         }
     }
+
+    internal IEnumerable<Room> GetConnections()
+    {
+        var toReturn = new List<Room>();
+
+        if (this.North != null)
+        {
+            toReturn.Add(this.North);
+        }
+        if (this.East != null)
+        {
+            toReturn.Add(this.East);
+        }
+        if (this.South != null)
+        {
+            toReturn.Add(this.South);
+        }
+        if (this.West != null)
+        {
+            toReturn.Add(this.West);
+        }
+
+        return toReturn;
+    }
 }

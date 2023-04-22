@@ -9,6 +9,28 @@ public static class FloorGenerator
 
     public static Floor Generate(int floorNumber)
     {
+        var floor = GenerateStructure(floorNumber);
+        AddRandomConnections(floor);
+        return floor;
+    }
+
+    private static void AddRandomConnections(Floor floor)
+    {
+        var numConnections = 4;
+        while (numConnections > 0)
+        {
+            var source = GetRandomRoom(floor);
+            var unconnected = Room.GetNeighbours(source, floor.Rooms).Except(source.GetConnections());
+            if (unconnected.Any())
+            {
+                var target = unconnected.ElementAt(random.Next(unconnected.Count()));
+                numConnections -= 1;
+            }
+        }
+    }
+
+    private static Floor GenerateStructure(int floorNumber)
+    {
         var rooms = new Room[RoomsWide, RoomsHigh];
         for (int y = 0; y < RoomsHigh; y++)
         {
@@ -42,5 +64,12 @@ public static class FloorGenerator
         }
 
         return new Floor(rooms, rooms[startX, startY], floorNumber);
+    }
+
+    private static Room GetRandomRoom(Floor floor)
+    {
+        var x = random.Next(RoomsWide);
+        var y = random.Next(RoomsHigh);
+        return floor.Rooms[x, y];
     }
 }
