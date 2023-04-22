@@ -14,15 +14,18 @@ class FloorGeneratorTests
         {
             // Arrange/Act
             var actual = FloorGenerator.Generate();
-            var connectedRooms = new List<Room>() { actual[0, 0] };
+            var connectedRooms = new List<Room>() { actual.Rooms[0, 0] };
 
             // Assert
+            Assert.That(actual.StartRoom, Is.Not.Null);
+            Assert.That(actual.Rooms[actual.StartRoom.X, actual.StartRoom.Y], Is.EqualTo(actual.StartRoom));
+
             for (var y = 0; y < FloorGenerator.RoomsHigh; y++)
             {
                 for (var x = 0; x < FloorGenerator.RoomsWide; x++)
                 {
                     // Basic connection check for isolated rooms
-                    var current = actual[x, y];
+                    var current = actual.Rooms[x, y];
                     Assert.That(current.Left != null || current.Right != null || current.Down != null || current.Up != null);
 
                     // Fully connected
