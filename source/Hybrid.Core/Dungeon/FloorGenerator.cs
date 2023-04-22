@@ -7,7 +7,6 @@ public static class FloorGenerator
 
     private static readonly Random random = new Random();
 
-    // TODO: unit test. Give me a fully-connected dungeon, and I'm happy.
     public static Room[,] Generate()
     {
         var rooms = new Room[RoomsWide, RoomsHigh];
