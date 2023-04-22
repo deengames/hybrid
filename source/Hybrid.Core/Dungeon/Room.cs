@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Hybrid.Core.Dungeon.Generators;
 
 namespace Hybrid.Core.Dungeon;
 

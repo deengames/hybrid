@@ -1,7 +1,8 @@
 using Hybrid.Core.Dungeon;
+using Hybrid.Core.Dungeon.Generators;
 using NUnit.Framework;
 
-namespace Hybrid.Core.UnitTests.Dungeon;
+namespace Hybrid.Core.UnitTests.Dungeon.Generators;
 
 [TestFixture]
 class FloorGeneratorTests

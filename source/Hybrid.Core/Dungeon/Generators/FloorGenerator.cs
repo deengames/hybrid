@@ -1,4 +1,4 @@
-namespace Hybrid.Core.Dungeon;
+namespace Hybrid.Core.Dungeon.Generators;
 
 public static class FloorGenerator
 {
