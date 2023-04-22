@@ -20,51 +20,27 @@ public static class FloorGenerator
             }
         }
 
-        var done = new List<Room>(); // BFS: white
-        var seen = new List<Room>(); // BFS: grey
-
         var roomX = random.Next(RoomsWide);
         var roomY = random.Next(RoomsHigh);
         var current = rooms[roomX, roomY];
 
-        while (done.Count < RoomsWide * RoomsHigh)
+        var connected = new List<Room>() { current };
+        while (connected.Count < RoomsWide * RoomsHigh)
         {
-            var neighbours = Room.GetConnections(rooms, roomX, roomY);
-            var unconnectedNeighbours = new List<Room>();
-
-            foreach (var neighbour in neighbours)
+            var adjacents = Room.GetNeighbours(current, rooms).Except(connected);
+            Room target = null;
+            
+            while (!adjacents.Any())
             {
-                if (!seen.Contains(neighbour) && !done.Contains(neighbour))
-                {
-                    seen.Add(neighbour);
-                    unconnectedNeighbours.Add(neighbour);
-                }
+                current = connected[random.Next(connected.Count)];
+                adjacents = Room.GetNeighbours(current, rooms).Except(connected);
             }
-
-            var connectTo = unconnectedNeighbours[random.Next(unconnectedNeighbours.Count)];
-            current.ConnectTo(connectTo);
-            seen.Remove(current);
-            done.Add(current);
-
-            var nextIndex = random.Next(seen.Count);
-            {
-                current = done[random.Next(done.Count)];
-                neighbours = Room.GetConnections(rooms, current.X, current.Y);
-                foreach (var neighbour in neighbours)
-                {
-                    // DUPLICATE CODE
-                    if (!seen.Contains(neighbour) && !done.Contains(neighbour))
-                    {
-                        seen.Add(neighbour);
-                    }
-                }
-
-            }
-            var next = seen[nextIndex];
-            seen.RemoveAt(nextIndex);
-            current = next;
+            
+            target = adjacents.ElementAt(random.Next(adjacents.Count()));
+            current.ConnectTo(target);
+            connected.Add(target);
+            current = target;
         }
-
         return rooms;
     }
 }

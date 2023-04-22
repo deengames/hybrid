@@ -20,26 +20,26 @@ public class Room
     }
 
     // TODO: unit test
-    internal static List<Room> GetConnections(Room[,] rooms, int roomX, int roomY)
+    internal static List<Room> GetNeighbours(Room room, Room[,] rooms)
     {
         var toReturn = new List<Room>();
         
-        if (roomX > 0)
+        if (room.X > 0)
         {
-            toReturn.Add(rooms[roomX - 1, roomY]);
+            toReturn.Add(rooms[room.X - 1, room.Y]);
         }
-        if (roomX < FloorGenerator.RoomsWide - 1)
+        if (room.X < FloorGenerator.RoomsWide - 1)
         {
-            toReturn.Add(rooms[roomX + 1, roomY]);
+            toReturn.Add(rooms[room.X + 1, room.Y]);
         }
 
-        if (roomY > 0)
+        if (room.Y > 0)
         {
-            toReturn.Add(rooms[roomX, roomY - 1]);
+            toReturn.Add(rooms[room.X, room.Y - 1]);
         }
-        if (roomY < FloorGenerator.RoomsHigh - 1)
+        if (room.Y < FloorGenerator.RoomsHigh - 1)
         {
-            toReturn.Add(rooms[roomX, roomY + 1]);
+            toReturn.Add(rooms[room.X, room.Y + 1]);
         }
 
         return toReturn;
