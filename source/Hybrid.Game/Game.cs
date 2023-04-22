@@ -1,6 +1,7 @@
 using Hybrid.Core.Character;
 using Hybrid.Game.Interfaces;
 using Hybrid.Game.Story;
+using Spectre.Console;
 
 namespace Hybrid.Game;
 
@@ -40,6 +41,7 @@ class Game
 
     public void End()
     {
+        AnsiConsole.ResetColors();
         currentScene = null;
         Console.WriteLine("Bye!");
     }

@@ -41,21 +41,17 @@ class SkillSelectScene : IScene
 
     private SkillData? AskWhichSkillToLearn()
     {
-        var input = "";
         int selection = 0;
         var allData = PlayerSkillsData.AllSkills;
 
         while (selection <= 0 || selection > unlearnedSkills.Count())
         {
-            AnsiConsole.Write("Enter the number of the skill to learn, or enter to start the game: ");
-            input = Console.ReadLine();
+            selection = AnsiConsole.Ask<int>("Enter the number of the skill to learn, or 0 to start the game: ");
             
-            if (!input.Any())
+            if (selection == 0)
             {
                 return null;
             }
-
-            int.TryParse(input, System.Globalization.NumberStyles.Integer, null, out selection);
 
             if (selection > 0 && selection <= unlearnedSkills.Count()) {
                 var selected = allData.Single(s => s.Name == unlearnedSkills.ElementAt(selection - 1).Name);
@@ -68,6 +64,10 @@ class SkillSelectScene : IScene
                     AnsiConsole.WriteLine($"You already assimilated {selected.Name}.");
                     selection = 0;
                 }
+            }
+            else
+            {
+                AnsiConsole.MarkupLine("[red]Invalid input[/]");
             }
         }
 
