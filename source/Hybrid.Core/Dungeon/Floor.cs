@@ -1,5 +1,3 @@
-using Hybrid.Core.Dungeon.Generators;
-
 namespace Hybrid.Core.Dungeon;
 
 public class Floor
@@ -9,15 +7,20 @@ public class Floor
     
     public Room[,] Rooms { get; private set; }
     public Room StartRoom { get; private set; }
+    public Room CurrentRoom { get; set; }
     public int FloorNumber { get; private set; }
 
     public Floor(Room[,] rooms, Room start, int floorNumber)
     {
         this.Rooms = rooms;
         this.StartRoom = start;
+        this.CurrentRoom = this.StartRoom;
         this.FloorNumber = floorNumber;
     }
 
+    /// <summary>
+    /// Returns a LINQ-queryable list of all the rooms.
+    /// </summary>
     public IList<Room> QueryRooms {
         get
         {

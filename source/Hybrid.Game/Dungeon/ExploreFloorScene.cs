@@ -9,6 +9,7 @@ namespace Hybrid.Game.Dungeon;
 class ExploreFloorScene : IScene
 {
     private Floor _currentFloor;
+    private Room _previousRoom;
 
     public ExploreFloorScene(Floor currentFloor)
     {
@@ -17,16 +18,20 @@ class ExploreFloorScene : IScene
 
     public void Show()
     {
-        var currentRoom = _currentFloor.StartRoom;
-
-        AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]You are on floor {_currentFloor.FloorNumber}[/] [{Colours.ThemeDark}]in room ({currentRoom.X}, {currentRoom.Y}).[/]");
-        ListExits(currentRoom);
-        ListMonsters(currentRoom);
+        AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]You are on floor {_currentFloor.FloorNumber}[/].");
+        new LookCommand(_currentFloor).Run();
+        _previousRoom = _currentFloor.CurrentRoom;
 
         AnsiConsole.MarkupLine($"What now? (Type [{Colours.ThemeHighlight}]help[/] for help, or [{Colours.ThemeHighlight}]quit[/] to quit.)");
 
         while (true) // "quit" quits
         {
+            if (_previousRoom != _currentFloor.CurrentRoom)
+            {
+                new LookCommand(_currentFloor).Run();
+                _previousRoom = _currentFloor.CurrentRoom;
+            }
+
             var input = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -47,8 +52,18 @@ class ExploreFloorScene : IScene
 
     private ICommand? GetCommand(string name)
     {
-        switch (name.Trim().ToLower())
+        name = name.Trim().ToLower();
+        switch (name)
         {
+            case "north":
+            case "east":
+            case "south":
+            case "west":
+            case "n":
+            case "e":
+            case "s":
+            case "w":
+                return new NavigateCommand(name, _currentFloor);
             case "h":
             case "help":
                 return new HelpCommand();
@@ -57,39 +72,6 @@ class ExploreFloorScene : IScene
                 return new QuitCommand();
             default:
                 return null;
-        }
-    }
-
-    private static void ListMonsters(Room currentRoom)
-    {
-        if (!currentRoom.Monsters.Any())
-        {
-            AnsiConsole.MarkupLine($"There are [{Colours.ThemeDark}]no monsters[/] in this room.");
-        }
-        else
-        {
-            AnsiConsole.MarkupLine($"There are [{Colours.ThemeHighlight}]{currentRoom.Monsters.Count} monsters[/] in this room: {String.Join(", ", currentRoom.Monsters.OrderBy(m => m.Cost).ThenBy(m => m.Name).Select(m => m.Name))}");
-        }
-    }
-
-    private static void ListExits(Room currentRoom)
-    {
-        AnsiConsole.MarkupLine($"Exits:");
-        if (currentRoom.North != null)
-        {
-            AnsiConsole.MarkupLine($"  [{Colours.ThemeDark}]North[/]");
-        }
-        if (currentRoom.East != null)
-        {
-            AnsiConsole.MarkupLine($"  [{Colours.ThemeDark}]East[/]");
-        }
-        if (currentRoom.South != null)
-        {
-            AnsiConsole.MarkupLine($"  [{Colours.ThemeDark}]South[/]");
-        }
-        if (currentRoom.West != null)
-        {
-            AnsiConsole.MarkupLine($"  [{Colours.ThemeDark}]West[/]");
         }
     }
 }
