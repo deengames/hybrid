@@ -44,7 +44,7 @@ class ExploreFloorScene : IScene
         }
         else
         {
-            AnsiConsole.MarkupLine($"There are [{Colours.ThemeHighlight}]{currentRoom.Monsters.Count} monsters[/] in this room: {String.Join(", ", currentRoom.Monsters.Select(m => m.Name))}");
+            AnsiConsole.MarkupLine($"There are [{Colours.ThemeHighlight}]{currentRoom.Monsters.Count} monsters[/] in this room: {String.Join(", ", currentRoom.Monsters.OrderBy(m => m.Cost).ThenBy(m => m.Name).Select(m => m.Name))}");
         }
 
         Game.Instance.End();
