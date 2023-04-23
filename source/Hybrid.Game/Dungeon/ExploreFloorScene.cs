@@ -70,6 +70,10 @@ class ExploreFloorScene : IScene
             case "q":
             case "quit":
                 return new QuitCommand();
+            case "d":
+            case "des":
+            case "descend":
+                return new DescendCommand(_currentFloor);
             default:
                 return null;
         }

@@ -15,7 +15,12 @@ class LookCommand : ICommand
 
     public void Run()
     {
-        AnsiConsole.MarkupLine($"You stand [{Colours.ThemeDark}]in room ({_currentFloor.CurrentRoom.X}, {_currentFloor.CurrentRoom.Y}).[/]");
+        AnsiConsole.MarkupLine($"You stand in [{Colours.ThemeDark}]in ({_currentFloor.CurrentRoom.X}, {_currentFloor.CurrentRoom.Y}).[/]");
+        if (_currentFloor.CurrentRoom == _currentFloor.StairsRoom)
+        {
+            AnsiConsole.MarkupLine($"You spy a [{Colours.ThemeHighlight}]deep chasm[/] leading to the [{Colours.ThemeDark}]next subterranean layer[/]. (Type d to descend.)");
+        }
+
         ShowExits(_currentFloor.CurrentRoom);
         ShowMonsters(_currentFloor.CurrentRoom);
     }

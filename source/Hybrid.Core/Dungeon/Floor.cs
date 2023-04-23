@@ -8,6 +8,7 @@ public class Floor
     public Room[,] Rooms { get; private set; }
     public Room StartRoom { get; private set; }
     public Room CurrentRoom { get; set; }
+    public Room StairsRoom { get; internal set; }
     public int FloorNumber { get; private set; }
 
     public Floor(Room[,] rooms, Room start, int floorNumber)
@@ -35,4 +36,5 @@ public class Floor
             return toReturn;
         }
     }
+
 }
