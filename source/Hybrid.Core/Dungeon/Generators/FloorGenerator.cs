@@ -11,6 +11,7 @@ public static class FloorGenerator
     {
         var floor = GenerateStructure(floorNumber);
         AddRandomConnections(floor);
+        MonsterGenerator.Generate(floor);
         return floor;
     }
 

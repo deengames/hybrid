@@ -1,5 +1,5 @@
 using Hybrid.Core.Data.Skills;
-using Hybrid.Core.Dungeon;
+using Hybrid.Core.Dungeon.Generators;
 using Hybrid.Game.Dungeon;
 using Hybrid.Game.Interfaces;
 using Hybrid.Game.IO;

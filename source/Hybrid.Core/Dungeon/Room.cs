@@ -3,16 +3,15 @@ using Hybrid.Core.Dungeon.Generators;
 
 namespace Hybrid.Core.Dungeon;
 
-[DebuggerDisplay("{X}, {Y}")]
 public class Room
 {
-    // monsters go in here
     public Room? North = null;
     public Room? East = null;
     public Room? South = null;
     public Room? West = null;
     public int X = -1;
     public int Y = -1;
+    public IList<Monster> Monsters = new List<Monster>();
 
     public Room(int x, int y)
     {

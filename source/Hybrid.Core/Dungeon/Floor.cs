@@ -1,3 +1,5 @@
+using Hybrid.Core.Dungeon.Generators;
+
 namespace Hybrid.Core.Dungeon;
 
 public class Floor
@@ -11,5 +13,20 @@ public class Floor
         this.Rooms = rooms;
         this.StartRoom = start;
         this.FloorNumber = floorNumber;
+    }
+
+    public IList<Room> QueryRooms {
+        get
+        {
+            var toReturn = new List<Room>();
+            for (var y = 0; y < FloorGenerator.RoomsHigh; y++)
+            {
+                for (var x = 0; x < FloorGenerator.RoomsWide; x++)
+                {
+                    toReturn.Add(this.Rooms[x, y]);
+                }
+            }
+            return toReturn;
+        }
     }
 }
