@@ -20,7 +20,7 @@ public class MonsterGenerator
         var minMonsterIndex = Math.Min(floorNumber - 1, data.Length - 1);
         var maxMonsterIndex = Math.Min(floorNumber + 1, data.Length - 1);
 
-        var numPacks = Floor.RoomsWide * Floor.RoomsHigh / 2;
+        var numPacks = 10; // experimentally derived
         var monsterRooms = floor.QueryRooms.OrderBy(r => random.Next()).Take(numPacks);
         
         foreach (var room in monsterRooms)

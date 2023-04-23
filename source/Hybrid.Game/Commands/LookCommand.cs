@@ -38,19 +38,19 @@ class LookCommand : ICommand
 
         if (currentRoom.North != null)
         {
-            AnsiConsole.MarkupLine($"  [{Colours.ThemeDark}]North[/]");
+            AnsiConsole.MarkupLine($"  [{Colours.ThemeHighlight}]North[/]");
         }
         if (currentRoom.East != null)
         {
-            AnsiConsole.MarkupLine($"  [{Colours.ThemeDark}]East[/]");
+            AnsiConsole.MarkupLine($"  [{Colours.ThemeHighlight}]East[/]");
         }
         if (currentRoom.South != null)
         {
-            AnsiConsole.MarkupLine($"  [{Colours.ThemeDark}]South[/]");
+            AnsiConsole.MarkupLine($"  [{Colours.ThemeHighlight}]South[/]");
         }
         if (currentRoom.West != null)
         {
-            AnsiConsole.MarkupLine($"  [{Colours.ThemeDark}]West[/]");
+            AnsiConsole.MarkupLine($"  [{Colours.ThemeHighlight}]West[/]");
         }
     }
 }
