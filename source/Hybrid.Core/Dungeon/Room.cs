@@ -28,7 +28,7 @@ public class Room
         {
             toReturn.Add(rooms[room.X - 1, room.Y]);
         }
-        if (room.X < FloorGenerator.RoomsWide - 1)
+        if (room.X < Floor.RoomsWide - 1)
         {
             toReturn.Add(rooms[room.X + 1, room.Y]);
         }
@@ -37,7 +37,7 @@ public class Room
         {
             toReturn.Add(rooms[room.X, room.Y - 1]);
         }
-        if (room.Y < FloorGenerator.RoomsHigh - 1)
+        if (room.Y < Floor.RoomsHigh - 1)
         {
             toReturn.Add(rooms[room.X, room.Y + 1]);
         }

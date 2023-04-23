@@ -24,9 +24,9 @@ class FloorGeneratorTests
             Assert.That(actual.StartRoom, Is.Not.Null);
             Assert.That(actual.Rooms[actual.StartRoom.X, actual.StartRoom.Y], Is.EqualTo(actual.StartRoom));
 
-            for (var y = 0; y < FloorGenerator.RoomsHigh; y++)
+            for (var y = 0; y < Floor.RoomsHigh; y++)
             {
-                for (var x = 0; x < FloorGenerator.RoomsWide; x++)
+                for (var x = 0; x < Floor.RoomsWide; x++)
                 {
                     // Basic connection check for isolated rooms
                     var current = actual.Rooms[x, y];
@@ -52,7 +52,18 @@ class FloorGeneratorTests
                 }
             }
             // Fully connected
-            Assert.That(connectedRooms.Count, Is.EqualTo(FloorGenerator.RoomsWide * FloorGenerator.RoomsHigh));
+            Assert.That(connectedRooms.Count, Is.EqualTo(Floor.RoomsWide * Floor.RoomsHigh));
         }
+    }
+
+    [Test]
+    public void Generate_GeneratesUniqueRooms()
+    {
+        // I can't explain why this is a bug.
+        // Arrange
+        // Act
+        var floor = FloorGenerator.Generate(1);
+        // Assert
+        Assert.That(floor.QueryRooms.Distinct().Count(), Is.EqualTo(Floor.RoomsWide * Floor.RoomsHigh));
     }
 }

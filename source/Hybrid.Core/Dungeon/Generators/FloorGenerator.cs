@@ -2,9 +2,6 @@ namespace Hybrid.Core.Dungeon.Generators;
 
 public static class FloorGenerator
 {
-    internal const int RoomsWide = 4;
-    internal const int RoomsHigh = 4;
-
     private static readonly Random random = new Random();
 
     public static Floor Generate(int floorNumber)
@@ -32,22 +29,22 @@ public static class FloorGenerator
 
     private static Floor GenerateStructure(int floorNumber)
     {
-        var rooms = new Room[RoomsWide, RoomsHigh];
-        for (int y = 0; y < RoomsHigh; y++)
+        var rooms = new Room[Floor.RoomsWide, Floor.RoomsHigh];
+        for (int y = 0; y < Floor.RoomsHigh; y++)
         {
-            for (int x = 0; x < RoomsWide; x++)
+            for (int x = 0; x < Floor.RoomsWide; x++)
             {
                 var room = new Room(x, y);
                 rooms[x, y] = room;
             }
         }
 
-        var startX = random.Next(RoomsWide);
-        var startY = random.Next(RoomsHigh);
+        var startX = random.Next(Floor.RoomsWide);
+        var startY = random.Next(Floor.RoomsHigh);
         var current = rooms[startX, startY];
 
         var connected = new List<Room>() { current };
-        while (connected.Count < RoomsWide * RoomsHigh)
+        while (connected.Count < Floor.RoomsWide * Floor.RoomsHigh)
         {
             var adjacents = Room.GetNeighbours(current, rooms).Except(connected);
             Room target = null;
@@ -69,8 +66,8 @@ public static class FloorGenerator
 
     private static Room GetRandomRoom(Floor floor)
     {
-        var x = random.Next(RoomsWide);
-        var y = random.Next(RoomsHigh);
+        var x = random.Next(Floor.RoomsWide);
+        var y = random.Next(Floor.RoomsHigh);
         return floor.Rooms[x, y];
     }
 }
