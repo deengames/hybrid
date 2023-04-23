@@ -7,7 +7,7 @@ public class MonsterGenerator
     internal const int PointsPerFloorMultiplier = 10;
     private const int MaxMonsters = 5;
 
-    private static Random random = new Random();
+    private static Random _random = new Random();
 
     public static void Generate(Floor floor)
     {
@@ -21,18 +21,18 @@ public class MonsterGenerator
         var maxMonsterIndex = Math.Min(floorNumber + 1, data.Length - 1);
 
         var numPacks = 10; // experimentally derived
-        var monsterRooms = floor.QueryRooms.OrderBy(r => random.Next()).Take(numPacks);
+        var monsterRooms = floor.QueryRooms.OrderBy(r => _random.Next()).Take(numPacks);
         
         foreach (var room in monsterRooms)
         {
-            var roomPointsLeft = totalPoints;
+            var roomPointsLeft = totalPoints - _random.Next(0, (int)0.2 * totalPoints); // 80%-100%
             var iterations = MaxMonsters;
             // I don't know why some rooms appear twice even though every list has unique entries.
             // This is a stupid fix.
             room.Monsters.Clear();
             while (roomPointsLeft > 0 && iterations-- > 0)
             {
-                var next = random.Next(minMonsterIndex, maxMonsterIndex + 1);
+                var next = _random.Next(minMonsterIndex, maxMonsterIndex + 1);
                 var monster = data[next];
                 if (roomPointsLeft >= monster.Cost)
                 {
