@@ -38,6 +38,15 @@ class ExploreFloorScene : IScene
             AnsiConsole.MarkupLine($"  [{Colours.ThemeDark}]West[/]");
         }
 
+        if (!currentRoom.Monsters.Any())
+        {
+            AnsiConsole.MarkupLine($"There are [{Colours.ThemeDark}]no monsters[/] in this room.");
+        }
+        else
+        {
+            AnsiConsole.MarkupLine($"There are [{Colours.ThemeHighlight}]{currentRoom.Monsters.Count} monsters[/] in this room: {String.Join(", ", currentRoom.Monsters.Select(m => m.Name))}");
+        }
+
         Game.Instance.End();
     }
 }
