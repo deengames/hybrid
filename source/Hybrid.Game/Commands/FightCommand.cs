@@ -39,7 +39,9 @@ class FightCommand : ICommand
 
         if (player.Health > 0)
         {
-            AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]VICTORY![/]");
+            AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]VICTORY![/]\n");
+            Game.Instance.CurrentFloor.CurrentRoom.Monsters.Clear();
+            new LookCommand().Run();
         }
         else
         {
