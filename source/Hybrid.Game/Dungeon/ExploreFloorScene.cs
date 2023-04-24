@@ -8,28 +8,22 @@ namespace Hybrid.Game.Dungeon;
 
 class ExploreFloorScene : IScene
 {
-    private Floor _currentFloor;
     private Room _previousRoom;
-
-    public ExploreFloorScene(Floor currentFloor)
-    {
-        _currentFloor = currentFloor;
-    }
 
     public void Show()
     {
-        AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]You are on floor {_currentFloor.FloorNumber}[/].");
-        new LookCommand(_currentFloor).Run();
-        _previousRoom = _currentFloor.CurrentRoom;
+        AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]You are on floor {Game.Instance.CurrentFloor.FloorNumber}B[/].");
+        new LookCommand().Run();
+        _previousRoom = Game.Instance.CurrentFloor.CurrentRoom;
 
         AnsiConsole.MarkupLine($"What now? (Type [{Colours.ThemeHighlight}]help[/] for help, or [{Colours.ThemeHighlight}]quit[/] to quit.)");
 
         while (true) // "quit" quits
         {
-            if (_previousRoom != _currentFloor.CurrentRoom)
+            if (_previousRoom != Game.Instance.CurrentFloor.CurrentRoom)
             {
-                new LookCommand(_currentFloor).Run();
-                _previousRoom = _currentFloor.CurrentRoom;
+                new LookCommand().Run();
+                _previousRoom = Game.Instance.CurrentFloor.CurrentRoom;
             }
 
             var input = Console.ReadLine();
@@ -63,7 +57,7 @@ class ExploreFloorScene : IScene
             case "e":
             case "s":
             case "w":
-                return new NavigateCommand(name, _currentFloor);
+                return new NavigateCommand(name);
             case "h":
             case "help":
                 return new HelpCommand();
@@ -73,7 +67,7 @@ class ExploreFloorScene : IScene
             case "d":
             case "des":
             case "descend":
-                return new DescendCommand(_currentFloor);
+                return new DescendCommand();
             default:
                 return null;
         }

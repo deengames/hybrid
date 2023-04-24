@@ -6,23 +6,18 @@ namespace Hybrid.Game.Commands;
 
 class LookCommand : ICommand
 {
-    private readonly Floor _currentFloor;
-    
-    public LookCommand(Floor currentFloor)
-    {
-        _currentFloor = currentFloor;
-    }
-
     public void Run()
     {
-        AnsiConsole.MarkupLine($"You stand in [{Colours.ThemeDark}]in ({_currentFloor.CurrentRoom.X}, {_currentFloor.CurrentRoom.Y}).[/]");
-        if (_currentFloor.CurrentRoom == _currentFloor.StairsRoom)
+        var currentFloor = Game.Instance.CurrentFloor;
+
+        AnsiConsole.MarkupLine($"You stand in [{Colours.ThemeDark}]in ({currentFloor.CurrentRoom.X}, {currentFloor.CurrentRoom.Y}).[/]");
+        if (currentFloor.CurrentRoom == currentFloor.StairsRoom)
         {
             AnsiConsole.MarkupLine($"You spy a [{Colours.ThemeHighlight}]deep chasm[/] leading to the [{Colours.ThemeDark}]next subterranean layer[/]. (Type d to descend.)");
         }
 
-        ShowExits(_currentFloor.CurrentRoom);
-        ShowMonsters(_currentFloor.CurrentRoom);
+        ShowExits(currentFloor.CurrentRoom);
+        ShowMonsters(currentFloor.CurrentRoom);
     }
 
     private static void ShowMonsters(Room currentRoom)

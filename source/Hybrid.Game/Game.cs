@@ -1,4 +1,5 @@
 using Hybrid.Core.Character;
+using Hybrid.Core.Dungeon;
 using Hybrid.Game.Interfaces;
 using Hybrid.Game.Story;
 using Spectre.Console;
@@ -10,6 +11,7 @@ class Game
     public static Game Instance { get; private set; } = new Game();
 
     internal Player Player = new Player();
+    internal Floor CurrentFloor;
     internal IScene? currentScene = new TitleScene();
 
     private Game()
@@ -45,5 +47,4 @@ class Game
         currentScene = null;
         Console.WriteLine("Bye!");
     }
-
 }

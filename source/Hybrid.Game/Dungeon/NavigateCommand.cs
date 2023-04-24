@@ -8,12 +8,10 @@ namespace Hybrid.Game.Dungeon
     internal class NavigateCommand : ICommand
     {
         private readonly string _direction;
-        private readonly Floor _currentFloor;
 
-        public NavigateCommand(string direction, Floor currentFloor)
+        public NavigateCommand(string direction)
         {
             _direction = direction;
-            _currentFloor = currentFloor;
         }
 
         public void Run()
@@ -43,24 +41,26 @@ namespace Hybrid.Game.Dungeon
 
         private void TryToMove(string direction)
         {
-            if (direction == "north" && _currentFloor.CurrentRoom.North != null)
+            var currentFloor = Game.Instance.CurrentFloor;
+
+            if (direction == "north" && currentFloor.CurrentRoom.North != null)
             {
-                _currentFloor.CurrentRoom = _currentFloor.CurrentRoom.North;
+                currentFloor.CurrentRoom = currentFloor.CurrentRoom.North;
                 ShowMove(direction);
             }
-            else if (direction == "east" && _currentFloor.CurrentRoom.East != null)
+            else if (direction == "east" && currentFloor.CurrentRoom.East != null)
             {
-                _currentFloor.CurrentRoom = _currentFloor.CurrentRoom.East;
+                currentFloor.CurrentRoom = currentFloor.CurrentRoom.East;
                 ShowMove(direction);
             }
-            else if (direction == "south" && _currentFloor.CurrentRoom.South != null)
+            else if (direction == "south" && currentFloor.CurrentRoom.South != null)
             {
-                _currentFloor.CurrentRoom = _currentFloor.CurrentRoom.South;
+                currentFloor.CurrentRoom = currentFloor.CurrentRoom.South;
                 ShowMove(direction);
             }
-            else if (direction == "west" && _currentFloor.CurrentRoom.West != null)
+            else if (direction == "west" && currentFloor.CurrentRoom.West != null)
             {
-                _currentFloor.CurrentRoom = _currentFloor.CurrentRoom.West;
+                currentFloor.CurrentRoom = currentFloor.CurrentRoom.West;
                 ShowMove(direction);
             }
             else 
