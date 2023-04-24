@@ -15,6 +15,11 @@ public class Monster : Actor
     public override string TakeTurn(List<Actor> actors)
     {
         var player = actors.Single(a => a is Player);
+        if (player.Health <= 0)
+        {
+            return "";
+        }
+
         var damage = this.MeleeAttack(player);
         
         var message = $"The [dark]{this.Name}[/] attacks [highlight]you[/] for [highlight]{damage}[/] damage.";

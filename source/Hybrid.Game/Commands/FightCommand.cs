@@ -14,9 +14,11 @@ class FightCommand : ICommand
         var actors = new List<Actor>() { player };
         actors.AddRange(currentRoom.Monsters);
         actors = actors.OrderByDescending(a => a.Speed).ToList();
+        var round = 1;
 
-        while (player.Health > 0 && currentRoom.Monsters.Any())
+        while (player.Health > 0 && actors.Any(a => a != player))
         {
+            AnsiConsole.MarkupLine($"\n[{Colours.ThemeHighlight}]Round {round++}[/]: {player.Health}/{player.TotalHealth} health left");
             foreach (var actor in actors)
             {
                 if (actor.Health <= 0)
@@ -33,6 +35,16 @@ class FightCommand : ICommand
 
             // Died? Sayounara.
             actors.RemoveAll(a => a.Health <= 0);
+        }
+
+        if (player.Health > 0)
+        {
+            AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]VICTORY![/]");
+        }
+        else
+        {
+            AnsiConsole.MarkupLine($"[{Colours.ThemeDark}]Defeated! Game over ...[/]");
+            new QuitCommand().Run();
         }
     }
 }
