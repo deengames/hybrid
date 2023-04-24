@@ -11,7 +11,7 @@ public static class MonstersData
             Name = "Green Slime", // weak
             TotalHealth = 20,
             Health = 20,
-            Strength = 5,
+            Strength = 10,
             Toughness = 3,
             Speed = 1,
             Cost = 1,
@@ -21,7 +21,7 @@ public static class MonstersData
             Name = "Blue Slime", // fast
             TotalHealth = 25,
             Health = 25,
-            Strength = 3,
+            Strength = 7,
             Toughness = 2,
             Speed = 10,
             Cost = 3,
@@ -31,7 +31,7 @@ public static class MonstersData
             Name = "Red Slime", // tank
             TotalHealth = 40,
             Health = 40,
-            Strength = 8,
+            Strength = 16,
             Toughness = 5,
             Speed = 4,
             Cost = 5

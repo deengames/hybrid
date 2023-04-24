@@ -62,16 +62,22 @@ class ExploreFloorScene : IScene
             case "s":
             case "w":
                 return new NavigateCommand(name);
+            case "d":
+            case "des":
+            case "descend":
+                return new DescendCommand();
+            case "f":
+            case "fight":
+            case "a":
+            case "attack":
+                return new FightCommand();
             case "h":
             case "help":
                 return new HelpCommand();
             case "q":
             case "quit":
                 return new QuitCommand();
-            case "d":
-            case "des":
-            case "descend":
-                return new DescendCommand();
+
             default:
                 return null;
         }
