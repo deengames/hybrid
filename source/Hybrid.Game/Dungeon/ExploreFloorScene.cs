@@ -36,6 +36,7 @@ class ExploreFloorScene : IScene
             var command = GetCommand(input);
             if (command != null)
             {
+                AnsiConsole.WriteLine();
                 command.Run();
                 continue;
             }
@@ -49,6 +50,9 @@ class ExploreFloorScene : IScene
         name = name.Trim().ToLower();
         switch (name)
         {
+            case "l":
+            case "look":
+                return new LookCommand();
             case "north":
             case "east":
             case "south":
