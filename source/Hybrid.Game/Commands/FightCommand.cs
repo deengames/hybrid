@@ -10,6 +10,11 @@ class FightCommand : ICommand
     {
         var currentRoom = Game.Instance.CurrentFloor.CurrentRoom;
         var player = Game.Instance.Player;
+        if (!currentRoom.Monsters.Any())
+        {
+            AnsiConsole.MarkupLine("There's nothing to fight here.");
+            return;
+        }
 
         var actors = new List<Actor>() { player };
         actors.AddRange(currentRoom.Monsters);
