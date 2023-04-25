@@ -16,6 +16,12 @@ public class Player : Actor
     // TODO: array perhaps. But I don't like: Skills, _skills, and now _implementations?
     private List<BaseSkill> _skillImplementations = new List<BaseSkill>();
 
+    private static Dictionary<string, Type> SkillToImplementation = new()
+    {
+        { "Regeneration", typeof(RegenerationSkill) },
+        { "Blood Horn", typeof(BloodHornSkill) },
+        { "Four Arms", typeof(FourArmsSkill) }
+    };
 
     public Player()
     {
@@ -38,14 +44,11 @@ public class Player : Actor
         }
 
         _skills.Add(skill.Name);
-        switch (skill.Name)
+        if (SkillToImplementation.ContainsKey(skill.Name))
         {
-            case "Regeneration":
-                _skillImplementations.Add(new RegenerationSkill(this));
-                break;
-            case "Blood Horn":
-                _skillImplementations.Add(new BloodHornSkill(this));
-                break;
+            var type = SkillToImplementation[skill.Name];
+            var instance = Activator.CreateInstance(type, this) as BaseSkill;
+            _skillImplementations.Add(instance);
         }
 
         this.SkillPoints -= skill.LearningCost;
@@ -72,15 +75,16 @@ public class Player : Actor
         
         var damage = this.MeleeAttack(weakest);
         message += $"[highlight]You[/] attack the [dark]{weakest.Name}[/] for [highlight]{damage}[/] damage.\n";
-        if (weakest.Health <= 0)
-        {
-            message += $" [highlight]{weakest.Name} DIES![/]\n";
-        }
 
         // POST-skills
         foreach (var skill in _skillImplementations)
         {
             message += skill.AfterAttack(weakest);
+        }
+
+        if (weakest.Health <= 0)
+        {
+            message += $" [highlight]{weakest.Name} DIES![/]\n";
         }
 
         return message;
