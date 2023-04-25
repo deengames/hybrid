@@ -12,8 +12,7 @@ class BloodHornSkill : BaseSkill
 
     override public string AfterAttack(Monster target)
     {
-        var damage = (int)Math.Ceiling(_player.CalculateDamage(target) * DamageAndHealPercent);
-
+        var damage = _player.Attack(target, DamageAndHealPercent);
         var pokeDamage = Math.Min(target.TotalHealth - target.Health, damage);
         target.Health -= pokeDamage;
         _player.Heal(pokeDamage);

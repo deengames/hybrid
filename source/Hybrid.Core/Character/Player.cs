@@ -112,7 +112,18 @@ public class Player : Actor
 
     public override int MeleeAttack(Actor target)
     {
-        var damage = CalculateDamage(target);
+        var monster = target as Monster;
+        if (monster == null)
+        {
+            throw new ArgumentException(nameof(target));
+        }
+
+        return this.Attack(monster);
+    }
+
+    internal int Attack(Monster target, float multiplier = 1.0f)
+    {
+        var damage = CalculateDamage(target, multiplier);
         if (damage > 0)
         {
             target.Health = Math.Max(target.Health - damage, 0);
@@ -120,8 +131,11 @@ public class Player : Actor
         return damage;
     }
 
-    internal int CalculateDamage(Actor target)
+    private int CalculateDamage(Actor target, float multiplier)
     {
-        return  Math.Max(this.Strength - target.Toughness, 0);
+        // Changing strength here is uninuitive, because it changes damage in weird ways.
+        var rawDamage = this.Strength - target.Toughness;
+        var adjusted = (int)Math.Ceiling(rawDamage * multiplier);
+        return Math.Max(adjusted, 0);
     }
 }

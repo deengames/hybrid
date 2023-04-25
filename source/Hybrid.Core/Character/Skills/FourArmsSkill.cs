@@ -12,8 +12,7 @@ class FourArmsSkill : BaseSkill
     
     public override string AfterAttack(Monster target)
     {
-        var damage = _player.CalculateDamage(target) * NumberOfExtraArms;
+        var damage = _player.Attack(target, NumberOfExtraArms);
         return $"You hit the [dark]{target.Name}[/] with your extra arms for [highlight]{damage}[/] damage.";
-        target.Health -= damage;
     }
 }
