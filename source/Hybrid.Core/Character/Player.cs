@@ -14,7 +14,7 @@ public class Player : Actor
     private List<string> _skills = new List<string>();
 
     // TODO: array perhaps. But I don't like: Skills, _skills, and now _implementations?
-    private List<ISkill> _skillImplementations = new List<ISkill>();
+    private List<BaseSkill> _skillImplementations = new List<BaseSkill>();
 
 
     public Player()
@@ -38,9 +38,14 @@ public class Player : Actor
         }
 
         _skills.Add(skill.Name);
-        if (skill.Name == "Regeneration")
+        switch (skill.Name)
         {
-            _skillImplementations.Add(new RegenerationSkill(this));
+            case "Regeneration":
+                _skillImplementations.Add(new RegenerationSkill(this));
+                break;
+            case "Blood Horn":
+                _skillImplementations.Add(new BloodHornSkill(this));
+                break;
         }
 
         this.SkillPoints -= skill.LearningCost;
@@ -51,13 +56,14 @@ public class Player : Actor
     public override string TakeTurn(List<Actor> actors)
     {
         // Who do I kill first? IDK, ig the weakest.
-        var weakest = actors.Except(new Actor[] { this }).OrderBy(a => a.Health).FirstOrDefault();
+        var weakest = actors.Except(new Actor[] { this }).OrderBy(a => a.Health).FirstOrDefault() as Monster;
         if (weakest == null)
         {
             // VICTORY!
             return "";
         }
 
+        // PRE-skills
         var message = "";
         foreach (var skill in _skillImplementations)
         {
@@ -65,11 +71,16 @@ public class Player : Actor
         }
         
         var damage = this.MeleeAttack(weakest);
-
-        message += $"[highlight]You[/] attack the [dark]{weakest.Name}[/] for [highlight]{damage}[/] damage.";
+        message += $"[highlight]You[/] attack the [dark]{weakest.Name}[/] for [highlight]{damage}[/] damage.\n";
         if (weakest.Health <= 0)
         {
-            message += $" [highlight]{weakest.Name} DIES![/]";
+            message += $" [highlight]{weakest.Name} DIES![/]\n";
+        }
+
+        // POST-skills
+        foreach (var skill in _skillImplementations)
+        {
+            message += skill.AfterAttack(weakest);
         }
 
         return message;
@@ -88,11 +99,16 @@ public class Player : Actor
 
     public override int MeleeAttack(Actor target)
     {
-        var damage = Math.Max(this.Strength - target.Toughness, 0);
+        var damage = CalculateDamage(target);
         if (damage > 0)
         {
             target.Health = Math.Max(target.Health - damage, 0);
         }
         return damage;
+    }
+
+    internal int CalculateDamage(Actor target)
+    {
+        return  Math.Max(this.Strength - target.Toughness, 0);
     }
 }

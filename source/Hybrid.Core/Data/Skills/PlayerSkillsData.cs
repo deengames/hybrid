@@ -1,9 +1,10 @@
+using Hybrid.Core.Character.Skills;
+
 namespace Hybrid.Core.Data.Skills;
 
 public static class PlayerSkillsData
 {
     public const int CarapaceToughnessPerLevel = 5;
-    public const float RegenTotalHealthPerRound = 0.1f;
 
     public static SkillData[] AllSkills = new SkillData[]
     {
@@ -27,7 +28,7 @@ public static class PlayerSkillsData
         {
             Name = "Regeneration",
             Species = "Blattodea", // Cockroach
-            Effect = $"Regenerate {(int)(RegenTotalHealthPerRound * 100)}% of your total health per round",
+            Effect = $"Regenerate {(int)(RegenerationSkill.HealthPerRound * 100)}% of your total health per round",
             Description = "With the genes of the  \"unkillable\" Red Spotted Cockroach, your body recovers in battle",
             LearningCost = 3,
         },
@@ -43,7 +44,7 @@ public static class PlayerSkillsData
         {
             Name = "Blood Horn",
             Species = "Culicidae", // mosquito,
-            Effect = "Adds an extra attack that heals you and poisons monsters",
+            Effect = "Adds an extra attack that heals you",
             Description = "Sprout a long, thin proboscis from your forehad",
             LearningCost = 2,
         },

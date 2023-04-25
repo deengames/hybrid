@@ -16,4 +16,10 @@ public abstract class Actor
 
     // Returns damage amount
     public abstract int MeleeAttack(Actor target);
+
+    public void Heal(int recovery)
+    {
+        var amount = Math.Min(recovery, this.TotalHealth - this.Health);
+        this.Health += amount;
+    }
 }
