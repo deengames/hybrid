@@ -20,7 +20,8 @@ public class Player : Actor
     {
         { "Regeneration", typeof(RegenerationSkill) },
         { "Blood Horn", typeof(BloodHornSkill) },
-        { "Four Arms", typeof(FourArmsSkill) }
+        { "Four Arms", typeof(FourArmsSkill) },
+        { "Slow Spores", typeof(SlowSporesSkill ) },
     };
 
     public Player()
@@ -66,6 +67,11 @@ public class Player : Actor
             return "";
         }
 
+        if (this.Health == 0)
+        {
+            return "";
+        }
+
         // PRE-skills
         var message = "";
         foreach (var skill in _skillImplementations)
@@ -77,9 +83,12 @@ public class Player : Actor
         message += $"[highlight]You[/] attack the [dark]{weakest.Name}[/] for [highlight]{damage}[/] damage.\n";
 
         // POST-skills
-        foreach (var skill in _skillImplementations)
+        if (weakest.Health > 0)
         {
-            message += skill.AfterAttack(weakest);
+            foreach (var skill in _skillImplementations)
+            {
+                message += skill.AfterAttack(weakest);
+            }
         }
 
         if (weakest.Health <= 0)

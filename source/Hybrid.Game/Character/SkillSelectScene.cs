@@ -88,9 +88,9 @@ class SkillSelectScene : IScene
             if (unlearned.Species != previousSpecies)
             {
                 previousSpecies = unlearned.Species;
-                AnsiConsole.MarkupLine($"Species: [{Colours.ThemeHighlight}]{unlearned.Species}[/]");
+                AnsiConsole.MarkupLine($"Species: [{Colours.ThemeDark}]{unlearned.Species}[/]");
             }
-            AnsiConsole.MarkupLine($"  {i + 1}: [{Colours.ThemeDark}]{unlearned.Name}[/] ({unlearned.LearningCost} points): {unlearned.Description}. [{Colours.ThemeHighlight}]{unlearned.Effect}[/].");
+            AnsiConsole.MarkupLine($"  {i + 1}: [{Colours.ThemeHighlight}]{unlearned.Name}[/] ({unlearned.LearningCost} points): {unlearned.Description}. [{Colours.ThemeHighlight}]{unlearned.Effect}[/].");
         }
     }
 

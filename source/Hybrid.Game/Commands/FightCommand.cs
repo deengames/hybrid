@@ -39,6 +39,9 @@ class FightCommand : ICommand
 
             // Died? Sayounara.
             actors.RemoveAll(a => a.Health <= 0);
+
+            // Speed can change mid-round
+            actors = actors.OrderByDescending(a => a.Speed).ToList();
         }
 
         if (player.Health > 0)
