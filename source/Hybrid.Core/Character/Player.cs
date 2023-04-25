@@ -1,3 +1,4 @@
+using Hybrid.Core.Character.Skills;
 using Hybrid.Core.Data.Skills;
 using Hybrid.Core.Dungeon;
 
@@ -13,7 +14,7 @@ public class Player : Actor
     private List<string> _skills = new List<string>();
 
     // TODO: array perhaps. But I don't like: Skills, _skills, and now _implementations?
-    private RegenerationSkill? _regenSkill;
+    private List<ISkill> _skillImplementations = new List<ISkill>();
 
 
     public Player()
@@ -39,7 +40,7 @@ public class Player : Actor
         _skills.Add(skill.Name);
         if (skill.Name == "Regeneration")
         {
-            _regenSkill = new RegenerationSkill(this);
+            _skillImplementations.Add(new RegenerationSkill(this));
         }
 
         this.SkillPoints -= skill.LearningCost;
@@ -58,10 +59,9 @@ public class Player : Actor
         }
 
         var message = "";
-        if (this._regenSkill != null)
+        foreach (var skill in _skillImplementations)
         {
-            message += $"You regenerate [highlight]{this._regenSkill.RegenAmount}[/] health!\n";
-            this._regenSkill.OnTakeTurn();
+            message += skill.PreTurn();
         }
         
         var damage = this.MeleeAttack(weakest);
