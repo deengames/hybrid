@@ -8,7 +8,10 @@ public class Player : Actor
     public int SkillPoints { get; private set; } = 5;
     public string[] Skills { get { return _skills.ToArray(); } }
     
+    public int Level { get; private set; } = 1;
+
     private List<string> _skills = new List<string>();
+
 
     public Player()
     {
@@ -32,6 +35,7 @@ public class Player : Actor
 
         _skills.Add(skill.Name);
         this.SkillPoints -= skill.LearningCost;
+
         return true;
     }
 
@@ -54,5 +58,26 @@ public class Player : Actor
         }
 
         return message;
+    }
+
+    public int GetTotalDefense()
+    {
+        var caparace = PlayerSkillsData.Get("Carapace");
+        var toReturn = this.Toughness;
+        if (this.Skills.Contains(caparace.Name))
+        {
+            toReturn += (this.Level * PlayerSkillsData.CarapaceToughnessPerLevel);
+        }
+        return toReturn;
+    }
+
+    public override int MeleeAttack(Actor target)
+    {
+        var damage = Math.Max(this.Strength - target.Toughness, 0);
+        if (damage > 0)
+        {
+            target.Health = Math.Max(target.Health - damage, 0);
+        }
+        return damage;
     }
 }

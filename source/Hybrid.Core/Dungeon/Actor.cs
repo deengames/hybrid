@@ -13,13 +13,5 @@ public abstract class Actor
     public abstract string TakeTurn(List<Actor> actors);
 
     // Returns damage amount
-    public int MeleeAttack(Actor target)
-    {
-        var damage = Math.Max(this.Strength - target.Toughness, 0);
-        if (damage > 0)
-        {
-            target.Health = Math.Max(target.Health - damage, 0);
-        }
-        return damage;
-    }
+    public abstract int MeleeAttack(Actor target);
 }

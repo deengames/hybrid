@@ -12,9 +12,9 @@ public class Monster : Actor
         return this.MemberwiseClone() as Monster;
     }
 
-    public override string TakeTurn(List<Actor> actors)
+    override public string TakeTurn(List<Actor> actors)
     {
-        var player = actors.Single(a => a is Player);
+        var player = actors.Single(a => a is Player) as Player;
         if (player.Health <= 0)
         {
             return "";
@@ -28,6 +28,17 @@ public class Monster : Actor
             message += " [dark]You die ... [/]";
         }
         return message;
+    }
+
+    override public int MeleeAttack(Actor target)
+    {
+        var player = target as Player;
+        var damage = Math.Max(this.Strength - player.GetTotalDefense(), 0);
+        if (damage > 0)
+        {
+            player.Health = Math.Max(player.Health - damage, 0);
+        }
+        return damage;
     }
 
     public override string ToString()

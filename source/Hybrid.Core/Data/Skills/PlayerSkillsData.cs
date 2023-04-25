@@ -2,13 +2,16 @@ namespace Hybrid.Core.Data.Skills;
 
 public static class PlayerSkillsData
 {
+    public const int CarapaceToughnessPerLevel = 5;
+    public const float RegenTotalHealthPerRound = 0.1f;
+
     public static SkillData[] AllSkills = new SkillData[]
     {
         new SkillData
         {
             Name = "Carapace",
             Species = "Arachanid",
-            Effect = "Increases defense by +5 per level",
+            Effect = $"Increases defense by {CarapaceToughnessPerLevel} per level",
             Description = "Grow a tough exterior carapace like the giant arachanids of Burkaan",
             LearningCost = 2,
         },
@@ -24,7 +27,7 @@ public static class PlayerSkillsData
         {
             Name = "Regeneration",
             Species = "Blattodea", // Cockroach
-            Effect = "Regenerate 3% of your total health per round",
+            Effect = $"Regenerate {(int)(RegenTotalHealthPerRound * 100)}% of your total health per round",
             Description = "With the genes of the  \"unkillable\" Red Spotted Cockroach, your body recovers in battle",
             LearningCost = 3,
         },
@@ -53,6 +56,8 @@ public static class PlayerSkillsData
             LearningCost = 1,
         }
     };
+    
+    public static SkillData Get(string name) => AllSkills.Single(s => s.Name == name);
 
     public static IEnumerable<SkillData> GetUnlearnedSkills(string[] skills)
     {
