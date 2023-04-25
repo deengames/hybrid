@@ -14,11 +14,10 @@ class FightCommand : ICommand
         var actors = new List<Actor>() { player };
         actors.AddRange(currentRoom.Monsters);
         actors = actors.OrderByDescending(a => a.Speed).ToList();
-        var round = 1;
 
         while (player.Health > 0 && actors.Any(a => a != player))
         {
-            AnsiConsole.MarkupLine($"\n[{Colours.ThemeHighlight}]Round {round++}[/]: {player.Health}/{player.TotalHealth} health left");
+            AnsiConsole.MarkupLine($"\nHealth: {player.Health}/{player.TotalHealth}");
             foreach (var actor in actors)
             {
                 if (actor.Health <= 0)

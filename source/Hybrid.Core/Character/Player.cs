@@ -12,6 +12,9 @@ public class Player : Actor
 
     private List<string> _skills = new List<string>();
 
+    // TODO: array perhaps. But I don't like: Skills, _skills, and now _implementations?
+    private RegenerationSkill? _regenSkill;
+
 
     public Player()
     {
@@ -34,6 +37,11 @@ public class Player : Actor
         }
 
         _skills.Add(skill.Name);
+        if (skill.Name == "Regeneration")
+        {
+            _regenSkill = new RegenerationSkill(this);
+        }
+
         this.SkillPoints -= skill.LearningCost;
 
         return true;
@@ -48,10 +56,17 @@ public class Player : Actor
             // VICTORY!
             return "";
         }
+
+        var message = "";
+        if (this._regenSkill != null)
+        {
+            message += $"You regenerate [highlight]{this._regenSkill.RegenAmount}[/] health!\n";
+            this._regenSkill.OnTakeTurn();
+        }
         
         var damage = this.MeleeAttack(weakest);
 
-        var message = $"[highlight]You[/] attack the [dark]{weakest.Name}[/] for [highlight]{damage}[/] damage.";
+        message += $"[highlight]You[/] attack the [dark]{weakest.Name}[/] for [highlight]{damage}[/] damage.";
         if (weakest.Health <= 0)
         {
             message += $" [highlight]{weakest.Name} DIES![/]";

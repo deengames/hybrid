@@ -9,7 +9,9 @@ public abstract class Actor
     public int Toughness { get; internal set; }
     public int Speed { get; internal set; }
 
-    // Returns marked-up string with message, e.g. [highlight]you[/] need a [dark]vacation[/] ...
+    /// <summary>
+    /// Returns marked-up string with message, e.g. [highlight]you[/] need a [dark]vacation[/] ...
+    /// </summary>
     public abstract string TakeTurn(List<Actor> actors);
 
     // Returns damage amount
