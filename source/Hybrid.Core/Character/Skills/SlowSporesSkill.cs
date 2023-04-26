@@ -14,7 +14,7 @@ class SlowSporesSkill : BaseSkill
         if (target.Speed > 1)
         {
             target.Speed -= 1;
-            return $"You release a cloud of spores that [dark]reduce {target.Name}'s speed[/] by [highlight]1[/] DEBUG TO {target.Speed}.\n";
+            return $"You release a cloud of spores that [dark]reduce {target.Name}'s speed[/] by [highlight]1[/].\n";
         }
 
         return string.Empty;
