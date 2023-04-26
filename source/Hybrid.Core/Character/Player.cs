@@ -117,6 +117,12 @@ public class Player : Actor
         return toReturn;
     }
 
+    public void LevelUp()
+    {
+        this.Level++;
+        this.SkillPoints++;
+    }
+
     // Returns: <damage, message>
     public override Tuple<int, string> MeleeAttack(Actor target)
     {

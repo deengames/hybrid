@@ -12,7 +12,8 @@ class DescendCommand : ICommand
         if (currentFloor.CurrentRoom == currentFloor.StairsRoom)
         {
             Game.Instance.CurrentFloor = FloorGenerator.Generate(Game.Instance.CurrentFloor.FloorNumber + 1);
-            AnsiConsole.MarkupLine($"You descend to [{Colours.ThemeHighlight}]{Game.Instance.CurrentFloor.FloorNumber}B[/].");
+            AnsiConsole.MarkupLine($"You descend to [{Colours.ThemeHighlight}]{Game.Instance.CurrentFloor.FloorNumber}B[/]. You gain [{Colours.ThemeHighlight}]1[/] skill point.");
+            Game.Instance.Player.LevelUp();
             return;
         }
 
