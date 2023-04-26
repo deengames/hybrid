@@ -35,10 +35,13 @@ class SkillSelectScene : IScene
             }
         } while (toLearn.HasValue);
 
+        if (Game.Instance.CurrentFloor == null)
+        {
+            Game.Instance.CurrentFloor = FloorGenerator.Generate(1);
+            AnsiConsole.WriteLine("You descend past the cusp of NIM-3 and into the first subterranean layer. (Press any key.)");
+            System.Console.ReadKey(true);
+        }
 
-        Game.Instance.CurrentFloor = FloorGenerator.Generate(1);
-        AnsiConsole.WriteLine("You descend past the cusp of NIM-3 and into the first subterranean layer. (Press any key.)");
-        System.Console.ReadKey(true);
         Game.Instance.ChangeScene(new ExploreFloorScene());
     }
 

@@ -71,13 +71,16 @@ class ExploreFloorScene : IScene
             case "a":
             case "attack":
                 return new FightCommand();
+            case "skills":
+            case "c":
+            case "character":
+                return new ShowSkillsCommand();
             case "h":
             case "help":
                 return new HelpCommand();
             case "q":
             case "quit":
                 return new QuitCommand();
-
             default:
                 return null;
         }
