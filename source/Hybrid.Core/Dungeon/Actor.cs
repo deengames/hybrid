@@ -14,8 +14,8 @@ public abstract class Actor
     /// </summary>
     public abstract string TakeTurn(List<Actor> actors);
 
-    // Returns damage amount
-    public abstract int MeleeAttack(Actor target);
+    // Returns damage amount and message
+    public abstract Tuple<int, string> MeleeAttack(Actor target);
 
     public void Heal(int recovery)
     {

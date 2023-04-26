@@ -20,7 +20,7 @@ public class Monster : Actor
             return "";
         }
 
-        var damage = this.MeleeAttack(player);
+        var damage = this.MeleeAttack(player).Item1;
         
         var message = $"The [dark]{this.Name}[/] attacks [highlight]you[/] for [highlight]{damage}[/] damage.";
         if (player.Health <= 0)
@@ -30,7 +30,7 @@ public class Monster : Actor
         return message;
     }
 
-    override public int MeleeAttack(Actor target)
+    override public Tuple<int, string> MeleeAttack(Actor target)
     {
         var player = target as Player;
         var damage = Math.Max(this.Strength - player.GetTotalDefense(), 0);
@@ -38,7 +38,7 @@ public class Monster : Actor
         {
             player.Health = Math.Max(player.Health - damage, 0);
         }
-        return damage;
+        return new Tuple<int, string>(damage, string.Empty);
     }
 
     public override string ToString()

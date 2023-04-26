@@ -1,3 +1,4 @@
+using System.Text;
 using Hybrid.Core.Character.Skills;
 using Hybrid.Core.Data.Skills;
 using Hybrid.Core.Dungeon;
@@ -22,6 +23,7 @@ public class Player : Actor
         { "Blood Horn", typeof(BloodHornSkill) },
         { "Four Arms", typeof(FourArmsSkill) },
         { "Slow Spores", typeof(SlowSporesSkill ) },
+        { "Stinger", typeof(StingerSkill ) },
     };
 
     public Player()
@@ -79,8 +81,14 @@ public class Player : Actor
             message += skill.PreTurn();
         }
         
-        var damage = this.MeleeAttack(weakest);
+        var result = this.MeleeAttack(weakest);
+        var damage = result.Item1;
+
         message += $"[highlight]You[/] attack the [dark]{weakest.Name}[/] for [highlight]{damage}[/] damage.\n";
+        if (!string.IsNullOrWhiteSpace(result.Item2))
+        {
+            message += result.Item2 + "\n";
+        }
 
         // POST-skills
         if (weakest.Health > 0)
@@ -110,7 +118,8 @@ public class Player : Actor
         return toReturn;
     }
 
-    public override int MeleeAttack(Actor target)
+    // Returns: <damage, message>
+    public override Tuple<int, string> MeleeAttack(Actor target)
     {
         var monster = target as Monster;
         if (monster == null)
@@ -118,7 +127,29 @@ public class Player : Actor
             throw new ArgumentException(nameof(target));
         }
 
-        return this.Attack(monster);
+        var damage = this.Attack(monster);
+        var message = "";
+        // Apply skills that take effect for EVERY ATTACK
+        foreach (var skill in _skillImplementations)
+        {
+            if (monster.Health > 0)
+            {
+                message += skill.OnAttack(monster);
+            }
+        }
+
+        return new Tuple<int, string>(damage, message);
+    }
+
+    ////////// TODO: MOVE INTO SKILL MANAGER (SINGLETON)
+    public string OnRoundEnd()
+    {
+        var message = new StringBuilder();
+        foreach (var skill in _skillImplementations)
+        {
+            message.AppendLine(skill.OnRoundEnd());
+        }
+        return message.ToString();
     }
 
     internal int Attack(Monster target, float multiplier = 1.0f)

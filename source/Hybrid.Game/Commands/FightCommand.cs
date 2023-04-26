@@ -31,11 +31,13 @@ class FightCommand : ICommand
                 }
 
                 var result = actor.TakeTurn(actors);
-                result = result
-                    .Replace("[highlight]", $"[{Colours.ThemeHighlight}]")
-                    .Replace("[dark]", $"[{Colours.ThemeDark}]");
+
+                result = FormatMarkup(result);
                 AnsiConsole.MarkupLine(result);
             }
+
+            // Apply round-end skill effects
+            AnsiConsole.Markup(FormatMarkup(player.OnRoundEnd()));
 
             // Died? Sayounara.
             actors.RemoveAll(a => a.Health <= 0);
@@ -55,5 +57,12 @@ class FightCommand : ICommand
             AnsiConsole.MarkupLine($"[{Colours.ThemeDark}]Defeated! Game over ...[/]");
             new QuitCommand().Run();
         }
+    }
+
+    private string FormatMarkup(string input)
+    {
+        return input
+            .Replace("[highlight]", $"[{Colours.ThemeHighlight}]")
+            .Replace("[dark]", $"[{Colours.ThemeDark}]");
     }
 }

@@ -26,4 +26,15 @@ abstract class BaseSkill
     {
         return string.Empty;
     }
+
+    // Called on each and every single player attack
+    public virtual string OnAttack(Monster target)
+    {
+        return string.Empty;
+    }
+
+    public virtual string OnRoundEnd()
+    {
+        return string.Empty;
+    }
 }
