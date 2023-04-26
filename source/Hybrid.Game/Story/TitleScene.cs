@@ -9,9 +9,15 @@ namespace Hybrid.Game.Story
         public void Show()
         {
             AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]Hyb[/][{Colours.ThemeDark}]rid[/]");
-            AnsiConsole.MarkupLine("Press any key to start a new game.");
-            System.Console.ReadKey(true);
+            AnsiConsole.MarkupLine("Press any key to start a new game, or q to quit.");
+            var key = System.Console.ReadKey(true);
 
+            if (key.KeyChar == 'q' || key.KeyChar == 'Q')
+            {
+                Console.WriteLine("Bye!");
+                System.Environment.Exit(0);
+            }
+            
             Game.Instance.ChangeScene(new StoryScene());
         }
     }
