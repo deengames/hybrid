@@ -83,7 +83,6 @@ public class Player : Actor
         
         var result = this.MeleeAttack(weakest);
         var damage = result.Item1;
-
         message += $"[highlight]You[/] attack the [dark]{weakest.Name}[/] for [highlight]{damage}[/] damage.\n";
         if (!string.IsNullOrWhiteSpace(result.Item2))
         {
@@ -127,18 +126,8 @@ public class Player : Actor
             throw new ArgumentException(nameof(target));
         }
 
-        var damage = this.Attack(monster);
-        var message = "";
-        // Apply skills that take effect for EVERY ATTACK
-        foreach (var skill in _skillImplementations)
-        {
-            if (monster.Health > 0)
-            {
-                message += skill.OnAttack(monster);
-            }
-        }
-
-        return new Tuple<int, string>(damage, message);
+        var result = this.Attack(monster);
+        return result;
     }
 
     ////////// TODO: MOVE INTO SKILL MANAGER (SINGLETON)
@@ -152,14 +141,25 @@ public class Player : Actor
         return message.ToString();
     }
 
-    internal int Attack(Monster target, float multiplier = 1.0f)
+    internal Tuple<int, string> Attack(Monster monster, float multiplier = 1.0f)
     {
-        var damage = CalculateDamage(target, multiplier);
+        var damage = CalculateDamage(monster, multiplier);
         if (damage > 0)
         {
-            target.Health = Math.Max(target.Health - damage, 0);
+            monster.Health = Math.Max(monster.Health - damage, 0);
         }
-        return damage;
+        
+        // Apply skills that take effect for EVERY ATTACK
+        var message = "";
+        foreach (var skill in _skillImplementations)
+        {
+            if (monster.Health > 0)
+            {
+                message += skill.OnAttack(monster);
+            }
+        }
+
+        return new Tuple<int, string>(damage, message);
     }
 
     private int CalculateDamage(Actor target, float multiplier)
