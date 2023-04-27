@@ -1,5 +1,6 @@
 $ErrorActionPreference = 'Stop'
 $gameName = "Hybrid.Game"
+$publishToItch = $True
 
 $platforms = @('Windows', 'Linux', 'MacOS')
 $rids = @{
@@ -51,7 +52,11 @@ foreach ($platform in $platforms)
 
     chmod -R 755 $publishDir
 
-    Add-Type -A 'System.IO.Compression.FileSystem'
-    [IO.Compression.ZipFile]::CreateFromDirectory($publishDir, $zipFile);
-    Write-Host DONE! Zipped to $zipFile
+    if ($publishToItch) {
+        iex "butler push $publishDir deengames/Hybrid:$platform"
+    } else {
+        Add-Type -A 'System.IO.Compression.FileSystem'
+        [IO.Compression.ZipFile]::CreateFromDirectory($publishDir, $zipFile);
+        Write-Host DONE! Zipped to $zipFile
+    }
 }
