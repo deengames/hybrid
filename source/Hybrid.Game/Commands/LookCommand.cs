@@ -28,7 +28,14 @@ class LookCommand : ICommand
         }
         else
         {
-            AnsiConsole.MarkupLine($"There are [{Colours.ThemeHighlight}]{currentRoom.Monsters.Count} monsters[/] in this room: {String.Join(", ", currentRoom.Monsters.OrderBy(m => m.Cost).ThenBy(m => m.Name).Select(m => m.Name))}");
+            if (currentRoom.Monsters.Count > 1)
+            {
+                AnsiConsole.MarkupLine($"There are [{Colours.ThemeHighlight}]{currentRoom.Monsters.Count} monsters[/] in this room: {String.Join(", ", currentRoom.Monsters.OrderBy(m => m.Cost).ThenBy(m => m.Name).Select(m => m.Name))}");
+            }
+            else
+            {
+                AnsiConsole.MarkupLine($"There is a [{Colours.ThemeHighlight}]{currentRoom.Monsters.Single().Name}[/] in this room.");
+            }
         }
     }
 

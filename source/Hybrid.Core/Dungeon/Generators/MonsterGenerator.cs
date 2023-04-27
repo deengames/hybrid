@@ -25,20 +25,27 @@ public class MonsterGenerator
         
         foreach (var room in monsterRooms)
         {
-            var roomPointsLeft = totalPoints - _random.Next(0, (int)0.2 * totalPoints); // 80%-100%
-            var iterations = MaxMonsters;
             // I don't know why some rooms appear twice even though every list has unique entries.
             // This is a stupid fix.
             room.Monsters.Clear();
-            while (roomPointsLeft > 0 && iterations-- > 0)
+            // GenerateMonstersByPoints(data, minMonsterIndex, maxMonsterIndex, room, totalPoints);
+            var next = _random.Next(minMonsterIndex, maxMonsterIndex + 1);
+            room.Monsters.Add(data[next]);
+        }
+    }
+
+    private static void GenerateMonstersByPoints(Monster[] data, int minMonsterIndex, int maxMonsterIndex, Room room, int totalPoints)
+    {
+        var roomPointsLeft = totalPoints - _random.Next(0, (int)0.2 * totalPoints); // 80%-100%
+        var iterations = MaxMonsters;
+        while (roomPointsLeft > 0 && iterations-- > 0)
+        {
+            var next = _random.Next(minMonsterIndex, maxMonsterIndex + 1);
+            var monster = data[next];
+            if (roomPointsLeft >= monster.Cost)
             {
-                var next = _random.Next(minMonsterIndex, maxMonsterIndex + 1);
-                var monster = data[next];
-                if (roomPointsLeft >= monster.Cost)
-                {
-                    roomPointsLeft -= monster.Cost;
-                    room.Monsters.Add(monster.Clone());
-                }
+                roomPointsLeft -= monster.Cost;
+                room.Monsters.Add(monster.Clone());
             }
         }
     }
