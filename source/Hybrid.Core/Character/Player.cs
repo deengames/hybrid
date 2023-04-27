@@ -15,6 +15,7 @@ public class Player : Actor
     private List<string> _skills = new List<string>();
 
     // TODO: array perhaps. But I don't like: Skills, _skills, and now _implementations?
+    // TODO: move into sklll manager
     private List<BaseSkill> _skillImplementations = new List<BaseSkill>();
 
     private static Dictionary<string, Type> SkillToImplementation = new()

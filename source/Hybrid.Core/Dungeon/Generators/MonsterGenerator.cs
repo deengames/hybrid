@@ -28,9 +28,16 @@ public class MonsterGenerator
             // I don't know why some rooms appear twice even though every list has unique entries.
             // This is a stupid fix.
             room.Monsters.Clear();
+
             // GenerateMonstersByPoints(data, minMonsterIndex, maxMonsterIndex, room, totalPoints);
-            var next = _random.Next(minMonsterIndex, maxMonsterIndex + 1);
-            room.Monsters.Add(data[next]);
+
+            // Generate 1-2 monsters max
+            var numMonsters = _random.Next(1, 3);
+            while (numMonsters-- > 0)
+            {
+                var next = _random.Next(minMonsterIndex, maxMonsterIndex + 1);
+                room.Monsters.Add(data[next]);
+            }
         }
     }
 
