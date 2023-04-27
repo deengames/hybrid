@@ -13,14 +13,21 @@ class DescendCommand : ICommand
         var currentFloor = Game.Instance.CurrentFloor;
         if (currentFloor.CurrentRoom == currentFloor.StairsRoom)
         {
-            if (Game.Instance.CurrentFloor.FloorNumber == Floor.FinalFloorNumber)
+            if (currentFloor.FloorNumber == Floor.FinalFloorNumber)
             {
                 Game.Instance.ChangeScene(new EndGameScene());
                 return;
             }
 
-            Game.Instance.CurrentFloor = FloorGenerator.Generate(Game.Instance.CurrentFloor.FloorNumber + 1);
-            AnsiConsole.MarkupLine($"You descend to [{Colours.ThemeHighlight}]{Game.Instance.CurrentFloor.FloorNumber}B[/]. You gain [{Colours.ThemeHighlight}]1[/] skill point.");
+            if (currentFloor.CurrentRoom.Monsters.Any())
+            {
+                AnsiConsole.MarkupLine($"You can't descend while [{Colours.ThemeDark}]there are monsters[/] around.");
+                return;
+            }
+
+            Game.Instance.CurrentFloor = FloorGenerator.Generate(currentFloor.FloorNumber + 1);
+            AnsiConsole.MarkupLine($"You descend to [{Colours.ThemeHighlight}]{Game.Instance.CurrentFloor.FloorNumber}B[/].");
+            AnsiConsole.MarkupLine($"You gained a level! Your strength, toughness, and agility increased by [{Colours.ThemeHighlight}]1 each[/]. You gained [{Colours.ThemeHighlight}]1[/] skill point.");
             Game.Instance.Player.LevelUp();
             return;
         }
