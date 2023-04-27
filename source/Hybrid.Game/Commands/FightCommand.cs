@@ -22,7 +22,7 @@ class FightCommand : ICommand
 
         while (player.Health > 0 && actors.Any(a => a != player))
         {
-            AnsiConsole.MarkupLine($"\nHealth: {player.Health}/{player.TotalHealth}");
+            // AnsiConsole.MarkupLine($"\nHealth: {player.Health}/{player.TotalHealth}");
             foreach (var actor in actors)
             {
                 if (actor.Health <= 0)
@@ -48,13 +48,15 @@ class FightCommand : ICommand
 
         if (player.Health > 0)
         {
-            AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]VICTORY![/]\n");
+            AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]You vanquish[/] the monsters, with [{Colours.ThemeDark}]{player.Health}/{player.TotalHealth}[/] health. Your wounds knit close.\n");
+
+            player.Heal(player.TotalHealth);
             Game.Instance.CurrentFloor.CurrentRoom.Monsters.Clear();
             new LookCommand().Run();
         }
         else
         {
-            AnsiConsole.MarkupLine($"[{Colours.ThemeDark}]Defeated! Game over ...[/]");
+            AnsiConsole.MarkupLine($"[{Colours.ThemeDark}]Your body disintegrates.[/] [{Colours.ThemeHighlight}]Game over[/] ...");
             new QuitCommand().Run();
         }
     }
