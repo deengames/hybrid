@@ -9,10 +9,10 @@ class RegenerationSkill : BaseSkill
     {
     }
 
-    override public string PreTurn()
+    override public string PreTurn(Actor self)
     {
-        _player.Heal(_regenAmount);
-        return $"You regenerate [highlight]{_regenAmount}[/] health!\n";
+        self.Heal(_regenAmount);
+        return $"{self.Name} regenerate(s) [highlight]{_regenAmount}[/] health!\n";
     }
 
 }

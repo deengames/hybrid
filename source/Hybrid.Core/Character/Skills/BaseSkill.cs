@@ -1,5 +1,3 @@
-using Hybrid.Core.Dungeon;
-
 namespace Hybrid.Core.Character.Skills;
 
 abstract class BaseSkill
@@ -12,23 +10,23 @@ abstract class BaseSkill
     }
 
     /// <summary>
-    /// Do something before the player starts his turn. Return a message if ya want.
+    /// Do something before an actor starts his turn. Return a message if ya want.
     /// </summary>
-    public virtual string PreTurn()
+    public virtual string PreTurn(Actor self)
     {
         return string.Empty;
     }
 
     /// <summary>
-    /// Do stuff after the player's melee attack. Only called if target is still alive.
+    /// Do stuff after an actor's melee attack. Only called if target is still alive.
     /// </summary>
-    public virtual string AfterAttack(Monster target)
+    public virtual string AfterAttack(Actor attacker, Actor target, string[] skills)
     {
         return string.Empty;
     }
 
-    // Called on each and every single player attack
-    public virtual string OnAttack(Monster target)
+    // Called on each and every single attack
+    public virtual string OnAttack(Actor target)
     {
         return string.Empty;
     }

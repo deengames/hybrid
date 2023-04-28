@@ -1,11 +1,13 @@
+using System.Text;
 using Hybrid.Core.Character;
+using Hybrid.Core.Character.Skills;
 
 namespace Hybrid.Core.Dungeon;
 
 public class Monster : Actor
 {
     public int Cost { get; set; }
-    public string[] Skills;
+    public override string[] Skills { get; }
 
     // Shallow clone.
     public Monster Clone()
@@ -21,14 +23,23 @@ public class Monster : Actor
             return "";
         }
 
-        var damage = this.MeleeAttack(player).Item1;
-        
-        var message = $"The [dark]{this.Name}[/] attacks [highlight]you[/] for [highlight]{damage}[/] damage.";
+        // PRE-skills
+        var message = new StringBuilder();
+        message.Append(SkillManager.Instance.OnPreAttack(this, this.Skills));
+
+        var damage = this.MeleeAttack(player).Item1;        
+        message.Append($"The [dark]{this.Name}[/] attacks [highlight]you[/] for [highlight]{damage}[/] damage.");
+
+        if (player.Health > 0)
+        {
+            message.Append(SkillManager.Instance.OnPostAttack(this, player, this.Skills));
+        }
+
         if (player.Health <= 0)
         {
-            message += " [dark]You die ... [/]";
+            message.Append(" [dark]You die ... [/]");
         }
-        return message;
+        return message.ToString();
     }
 
     override public Tuple<int, string> MeleeAttack(Actor target)

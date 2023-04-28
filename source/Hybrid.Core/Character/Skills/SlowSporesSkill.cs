@@ -1,5 +1,3 @@
-using Hybrid.Core.Dungeon;
-
 namespace Hybrid.Core.Character.Skills;
 
 class SlowSporesSkill : BaseSkill
@@ -9,7 +7,8 @@ class SlowSporesSkill : BaseSkill
 
     }
 
-    public override string AfterAttack(Monster target)
+    // WARNING: DESTRUCTIVE AGAINST PLAYER. Speed does not reset after battle!
+    public override string AfterAttack(Actor attacker, Actor target, string[] skills)
     {
         if (target.Speed > 1)
         {

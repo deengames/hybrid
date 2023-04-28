@@ -8,9 +8,10 @@ namespace Hybrid.Core.Character;
 public class Player : Actor
 {
     public int SkillPoints { get; private set; } = 5;
-    public string[] Skills { get { return _skills.ToArray(); } }
     
     public int Level { get; private set; } = 1;
+
+    public override string[] Skills => _skills.ToArray();
 
     private List<string> _skills = new List<string>();
 
@@ -58,7 +59,7 @@ public class Player : Actor
 
         // PRE-skills
         var message = new StringBuilder();
-        message.Append(SkillManager.Instance.OnPlayerPreAttack());
+        message.Append(SkillManager.Instance.OnPreAttack(this, this.Skills));
 
         var result = this.MeleeAttack(weakest);
         var damage = result.Item1;
@@ -72,7 +73,7 @@ public class Player : Actor
         // POST-skills
         if (weakest.Health > 0)
         {
-            message.Append(SkillManager.Instance.OnPlayerPostAttack(weakest));
+            message.Append(SkillManager.Instance.OnPostAttack(this, weakest, this.Skills));
         }
 
         if (weakest.Health <= 0)
@@ -118,27 +119,7 @@ public class Player : Actor
             throw new ArgumentException(nameof(target));
         }
 
-        var result = this.Attack(monster);
+        var result = this.Attack(monster, this.Skills);
         return result;
-    }
-
-    internal Tuple<int, string> Attack(Monster monster, float multiplier = 1.0f)
-    {
-        var damage = CalculateDamage(monster, multiplier);
-        if (damage > 0)
-        {
-            monster.Health = Math.Max(monster.Health - damage, 0);
-        }
-        
-        var message = SkillManager.Instance.OnPlayerAttack(monster);
-        return new Tuple<int, string>(damage, message);
-    }
-
-    private int CalculateDamage(Actor target, float multiplier)
-    {
-        // Changing strength here is uninuitive, because it changes damage in weird ways.
-        var rawDamage = this.Strength - target.Toughness;
-        var adjusted = (int)Math.Ceiling(rawDamage * multiplier);
-        return Math.Max(adjusted, 0);
     }
 }

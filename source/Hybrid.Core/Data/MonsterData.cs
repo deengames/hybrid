@@ -55,7 +55,6 @@ public static class MonstersData
             Toughness = 4,
             Speed = 12,
             Cost = 4,
-            Skills = new string[] { "Blood Horn" }
         }
     };
 }

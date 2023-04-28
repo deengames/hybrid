@@ -10,14 +10,14 @@ class BloodHornSkill : BaseSkill
     {
     }
 
-    override public string AfterAttack(Monster target)
+    override public string AfterAttack(Actor attacker, Actor target, string[] skills)
     {
-        var result = _player.Attack(target, DamageAndHealPercent);
+        var result = attacker.Attack(target, skills, DamageAndHealPercent);
         var damage = result.Item1;
 
         var pokeDamage = Math.Min(target.TotalHealth - target.Health, damage);
         target.Health -= pokeDamage;
-        _player.Heal(pokeDamage);
+        attacker.Heal(pokeDamage);
 
         return $"[highlight]You[/] stab the [dark]{target.Name}[/] with your probiscous, damaging it and healing yourself for [highlight]{pokeDamage}[/] health.\n{result.Item2}\n";
     }

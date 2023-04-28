@@ -1,5 +1,4 @@
 using System.Text;
-using Hybrid.Core.Dungeon;
 
 namespace Hybrid.Core.Character.Skills;
 
@@ -9,7 +8,7 @@ public class SkillManager
 
     private List<BaseSkill> _skillImplementations = new List<BaseSkill>();
 
-    private static Dictionary<string, Type> SkillToImplementation = new()
+    private static Dictionary<string, Type> SkillToType = new()
     {
         { "Regeneration", typeof(RegenerationSkill) },
         { "Blood Horn", typeof(BloodHornSkill) },
@@ -20,52 +19,55 @@ public class SkillManager
 
     public void OnPlayerLearn(Player player, string skillName)
     {
-        if (SkillToImplementation.ContainsKey(skillName))
+        if (SkillToType.ContainsKey(skillName))
         {
-            var type = SkillToImplementation[skillName];
+            var type = SkillToType[skillName];
             var instance = Activator.CreateInstance(type, player) as BaseSkill;
             _skillImplementations.Add(instance);
         }
     }
 
-    public string OnPlayerPreAttack()
+    public string OnPreAttack(Actor self, string[] skills)
     {
         var message = new StringBuilder();
-        foreach (var skill in _skillImplementations)
+        foreach (var skillName in skills)
         {
-            message.Append(skill.PreTurn());
+            var skill = GetSkillImplementation(skillName);
+            message.Append(skill.PreTurn(self));
         }
         return message.ToString();
     }
 
-    public string OnPlayerPostAttack(Monster target)
+    public string OnPostAttack(Actor attacker, Actor target, string[] skills)
     {
         var message = new StringBuilder();
-        foreach (var skill in _skillImplementations)
+        foreach (var skillName in skills)
         {
-            message.Append(skill.AfterAttack(target));
+            var skill = GetSkillImplementation(skillName);
+            message.Append(skill.AfterAttack(attacker, target, skills));
         }
         return message.ToString();
     }
 
     // Applied once at the end of a round
-    public string OnRoundEnd()
+    public string OnRoundEnd(string[] skills)
     {
         var message = new StringBuilder();
-        foreach (var skill in _skillImplementations)
+        foreach (var skillName in skills)
         {
-            message.AppendLine(skill.OnRoundEnd());
+            var skill = GetSkillImplementation(skillName);
+            message.AppendLine(skill.OnRoundEnd()); // No Actor context needed yet
         }
         return message.ToString();
     }
 
     // Apply skills that take effect for EVERY ATTACK
-    public string OnPlayerAttack(Monster target)
+    public string OnAttack(Actor target, string[] skills)
     {
         var message = new StringBuilder();
-        
-        foreach (var skill in _skillImplementations)
+        foreach (var skillName in skills)
         {
+            var skill = GetSkillImplementation(skillName);
             if (target.Health > 0)
             {
                 message.Append(skill.OnAttack(target));
@@ -73,5 +75,10 @@ public class SkillManager
         }
 
         return message.ToString();
+    }
+
+    private BaseSkill GetSkillImplementation(string skillName)
+    {
+        return _skillImplementations.Single(s => s.GetType() == SkillToType[skillName]);
     }
 }

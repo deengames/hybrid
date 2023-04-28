@@ -38,7 +38,10 @@ class FightCommand : ICommand
             }
 
             // Apply round-end skill effects
-            AnsiConsole.Markup(FormatMarkup(SkillManager.Instance.OnRoundEnd()));
+            foreach (var actor in actors)
+            {
+                AnsiConsole.Markup(FormatMarkup(SkillManager.Instance.OnRoundEnd(actor.Skills)));
+            }
 
             // Died? Sayounara.
             actors.RemoveAll(a => a.Health <= 0);
