@@ -19,6 +19,9 @@ public class Player : Actor
         this.Strength = 10;
         this.Toughness = 5;
         this.Speed = 5;
+
+        // Initalize skill manager singleton
+        new SkillManager(this);
     }
 
     /// <summary>
@@ -33,7 +36,6 @@ public class Player : Actor
 
         // this.Skills.Add(skill.Name);
         this.Skills = new List<string>(this.Skills) { skill.Name }.ToArray();
-        SkillManager.Instance.OnPlayerLearn(this, skill.Name);
         this.SkillPoints -= skill.LearningCost;
 
         return true;
@@ -64,7 +66,7 @@ public class Player : Actor
         if (!string.IsNullOrWhiteSpace(result.Item2))
         {
             // Attack messages
-            message.AppendLine(result.Item2);;
+            message.AppendLine(result.Item2);
         }
 
         // POST-skills

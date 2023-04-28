@@ -27,7 +27,7 @@ public class Monster : Actor
         message.Append(SkillManager.Instance.OnPreAttack(this, this.Skills));
 
         var damage = this.MeleeAttack(player).Item1;        
-        message.Append($"The [dark]{this.Name}[/] attacks [highlight]you[/] for [highlight]{damage}[/] damage.");
+        message.Append($"The [dark]{this.Name}[/] attacks [highlight]you[/] for [highlight]{damage}[/] damage.  ");
 
         if (player.Health > 0)
         {

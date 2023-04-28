@@ -19,6 +19,6 @@ class BloodHornSkill : BaseSkill
         target.Health -= pokeDamage;
         attacker.Heal(pokeDamage);
 
-        return $"[highlight]You[/] stab the [dark]{target.Name}[/] with your probiscous, damaging it and healing yourself for [highlight]{pokeDamage}[/] health.\n{result.Item2}\n";
+        return $"[highlight]{attacker.Name}[/] stab(s) [dark]{target.Name}[/] with a probiscous, damaging and healing for [highlight]{pokeDamage}[/] health.\n{result.Item2}\n";
     }
 }

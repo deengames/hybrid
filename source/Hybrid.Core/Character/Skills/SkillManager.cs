@@ -4,9 +4,9 @@ namespace Hybrid.Core.Character.Skills;
 
 public class SkillManager
 {
-    public static SkillManager Instance { get; } = new SkillManager();
+    public static SkillManager Instance { get; private set; }
 
-    private List<BaseSkill> _skillImplementations = new List<BaseSkill>();
+    private Dictionary<string, BaseSkill> _skillImplementations = new Dictionary<string, BaseSkill>();
 
     private static Dictionary<string, Type> SkillToType = new()
     {
@@ -17,13 +17,14 @@ public class SkillManager
         { "Stinger", typeof(StingerSkill ) },
     };
 
-    public void OnPlayerLearn(Player player, string skillName)
+    public SkillManager(Player player)
     {
-        if (SkillToType.ContainsKey(skillName))
+        SkillManager.Instance = this;
+        foreach (var skillName in SkillToType.Keys)
         {
-            var type = SkillToType[skillName];
-            var instance = Activator.CreateInstance(type, player) as BaseSkill;
-            _skillImplementations.Add(instance);
+            var skillType = SkillToType[skillName];
+            var skill = Activator.CreateInstance(skillType, player) as BaseSkill;
+            _skillImplementations[skillName] = skill;
         }
     }
 
@@ -79,6 +80,6 @@ public class SkillManager
 
     private BaseSkill GetSkillImplementation(string skillName)
     {
-        return _skillImplementations.Single(s => s.GetType() == SkillToType[skillName]);
+        return _skillImplementations[skillName];
     }
 }
