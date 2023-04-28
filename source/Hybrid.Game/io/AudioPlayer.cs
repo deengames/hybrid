@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using NAudio.Wave;
 
 namespace Hybrid.Game.IO;
@@ -7,6 +8,12 @@ static class AudioPlayer {
     public static Action<string> OnPlayDone;
 
     public static void Play(string sound) {
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            // NAudio doesn't support Linux because it uses DirectX/Windows APIs
+            return;
+        }
+
         string fullPath = Path.Join("assets", "audio", "sfx", sound);
         if (!sound.EndsWith(".wav")) {
             fullPath += ".wav";
