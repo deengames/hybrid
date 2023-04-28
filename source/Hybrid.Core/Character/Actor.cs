@@ -10,7 +10,7 @@ public abstract class Actor
     public int Strength { get; internal set; }
     public int Toughness { get; internal set; }
     public int Speed { get; internal set; }
-    public abstract string[] Skills { get; }
+    public string[] Skills { get; set; } = new string[0];
 
     /// <summary>
     /// Returns marked-up string with message, e.g. [highlight]you[/] need a [dark]vacation[/] ...

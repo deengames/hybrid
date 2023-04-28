@@ -52,8 +52,8 @@ public static class MonstersData
             Name = "Culiwing", // mosquito
             TotalHealth = 100,
             Health = 100,
-            Strength = 10,
-            Toughness = 4,
+            Strength = 15,
+            Toughness = 1,
             Speed = 12,
             Cost = 4,
             Skills = new string[] { "Blood Horn" }

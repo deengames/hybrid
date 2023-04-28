@@ -11,10 +11,6 @@ public class Player : Actor
     
     public int Level { get; private set; } = 1;
 
-    public override string[] Skills => _skills.ToArray();
-
-    private List<string> _skills = new List<string>();
-
     public Player()
     {
         this.Name = "You";
@@ -30,12 +26,13 @@ public class Player : Actor
     /// </summary>
     public bool Learn(SkillData skill)
     {
-        if (_skills.Contains(skill.Name))
+        if (this.Skills.Contains(skill.Name))
         {
             return false;
         }
 
-        _skills.Add(skill.Name);
+        // this.Skills.Add(skill.Name);
+        this.Skills = new List<string>(this.Skills) { skill.Name }.ToArray();
         SkillManager.Instance.OnPlayerLearn(this, skill.Name);
         this.SkillPoints -= skill.LearningCost;
 
