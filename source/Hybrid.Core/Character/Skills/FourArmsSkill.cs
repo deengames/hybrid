@@ -13,6 +13,6 @@ class FourArmsSkill : BaseSkill
         var numAttacks = attacker is Player ? NumberOfExtraArms : 1;
         var result = attacker.Attack(target, skills, numAttacks);
         var damage = result.Item1;
-        return $"You hit the [dark]{target.Name}[/] with your extra arms for [highlight]{damage}[/] damage.\n{result.Item2}\n";
+        return $"You hit the [dark]{target.Name}[/] with your extra arms for [highlight]{damage}[/] damage.\n{result.Item2}";
     }
 }

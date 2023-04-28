@@ -66,7 +66,7 @@ public class Player : Actor
         if (!string.IsNullOrWhiteSpace(result.Item2))
         {
             // Attack messages
-            message.AppendLine(result.Item2);
+            message.Append(result.Item2);
         }
 
         // POST-skills

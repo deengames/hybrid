@@ -82,7 +82,7 @@ class SkillSelectScene : IScene
 
     private void ListUnlearnedSkills()
     {
-        AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]Unlearned skills:[/]\n");
+        AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]Unlearned skills:[/]");
         var previousSpecies = "";
 
         for (var i = 0; i < unlearnedSkills.Count(); i++)
@@ -99,11 +99,11 @@ class SkillSelectScene : IScene
 
     private void ShowIntro(int skillPoints)
     {
-        AnsiConsole.MarkupLine($"[{Colours.ThemeDark}]Choose your skills.[/] You have [{Colours.ThemeHighlight}]{skillPoints}[/] skill points.\n");
+        AnsiConsole.MarkupLine($"[{Colours.ThemeDark}]Choose your skills.[/] You have [{Colours.ThemeHighlight}]{skillPoints}[/] skill points.");
     }
 
     private void ShowCurrentSkills(string[] skills)
     {
-        AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]Current skills[/] ({skills.Length}): {string.Join(", ", skills)}\n");
+        AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]Current skills[/] ({skills.Length}): {string.Join(", ", skills)}");
     }
 }

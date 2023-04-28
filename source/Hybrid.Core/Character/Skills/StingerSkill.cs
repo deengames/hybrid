@@ -22,7 +22,7 @@ class StingerSkill : BaseSkill
 
         venomAmount[target] += VenomPerStrike;
 
-        return $"Stingers stab into and [dark]poison {target.Name}[/] [highlight]{VenomPerStrike}[/] times!";
+        return $"Stingers stab into and [dark]poison {target.Name}[/] [highlight]{VenomPerStrike}[/] times!\n";
     }
 
     public override string OnRoundEnd()
@@ -36,15 +36,15 @@ class StingerSkill : BaseSkill
                 actor.Health = Math.Max(0, actor.Health - damage);
                 message.Append($"Venom courses through [dark]{actor.Name}[/]! [highlight]{damage}[/] damage!");
                 
-                if (actor.Health == 0)
+                if (actor.Health <= 0)
                 {
                     message.Append($" [highlight]{actor.Name} succumbs to poison and DIES![/]");
                 }
 
-                message.Append("\n");
+                message.AppendLine("");
 
                 venomAmount[actor] -= 1;
-                if (venomAmount[actor] == 0)
+                if (venomAmount[actor] <= 0)
                 {
                     venomAmount.Remove(actor);
                 }

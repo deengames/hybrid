@@ -52,7 +52,7 @@ class FightCommand : ICommand
 
         if (player.Health > 0)
         {
-            AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]You vanquish[/] the monsters, with [{Colours.ThemeDark}]{player.Health}/{player.TotalHealth}[/] health. Your wounds knit close.\n");
+            AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]You vanquish[/] the monsters, with [{Colours.ThemeDark}]{player.Health}/{player.TotalHealth}[/] health. Your wounds knit close.");
 
             player.Heal(player.TotalHealth);
             Game.Instance.CurrentFloor.CurrentRoom.Monsters.Clear();

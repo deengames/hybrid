@@ -71,7 +71,7 @@ namespace Hybrid.Game.Dungeon
 
         private void ShowMove(string direction)
         {
-            AnsiConsole.MarkupLine($"You move [{Colours.ThemeDark}]{direction}[/].\n");
+            AnsiConsole.MarkupLine($"You move [{Colours.ThemeDark}]{direction}[/].");
         }
     }
 }

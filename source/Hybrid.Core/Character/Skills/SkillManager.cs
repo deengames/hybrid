@@ -57,7 +57,7 @@ public class SkillManager
         foreach (var skillName in skills)
         {
             var skill = GetSkillImplementation(skillName);
-            message.AppendLine(skill.OnRoundEnd()); // No Actor context needed yet
+            message.Append(skill.OnRoundEnd()); // No Actor context needed yet
         }
         return message.ToString();
     }
