@@ -14,19 +14,6 @@ public class Player : Actor
 
     private List<string> _skills = new List<string>();
 
-    // TODO: array perhaps. But I don't like: Skills, _skills, and now _implementations?
-    // TODO: move into sklll manager
-    private List<BaseSkill> _skillImplementations = new List<BaseSkill>();
-
-    private static Dictionary<string, Type> SkillToImplementation = new()
-    {
-        { "Regeneration", typeof(RegenerationSkill) },
-        { "Blood Horn", typeof(BloodHornSkill) },
-        { "Four Arms", typeof(FourArmsSkill) },
-        { "Slow Spores", typeof(SlowSporesSkill ) },
-        { "Stinger", typeof(StingerSkill ) },
-    };
-
     public Player()
     {
         this.Name = "You";
@@ -48,13 +35,7 @@ public class Player : Actor
         }
 
         _skills.Add(skill.Name);
-        if (SkillToImplementation.ContainsKey(skill.Name))
-        {
-            var type = SkillToImplementation[skill.Name];
-            var instance = Activator.CreateInstance(type, this) as BaseSkill;
-            _skillImplementations.Add(instance);
-        }
-
+        SkillManager.Instance.OnPlayerLearn(this, skill.Name);
         this.SkillPoints -= skill.LearningCost;
 
         return true;
@@ -76,37 +57,33 @@ public class Player : Actor
         }
 
         // PRE-skills
-        var message = "";
-        foreach (var skill in _skillImplementations)
-        {
-            message += skill.PreTurn();
-        }
-        
+        var message = new StringBuilder();
+        message.Append(SkillManager.Instance.OnPlayerPreAttack());
+
         var result = this.MeleeAttack(weakest);
         var damage = result.Item1;
-        message += $"[highlight]You[/] attack the [dark]{weakest.Name}[/] for [highlight]{damage}[/] damage.\n";
+        message.AppendLine($"[highlight]You[/] attack the [dark]{weakest.Name}[/] for [highlight]{damage}[/] damage.");
         if (!string.IsNullOrWhiteSpace(result.Item2))
         {
-            message += result.Item2 + "\n";
+            // Attack messages
+            message.AppendLine(result.Item2);;
         }
 
         // POST-skills
         if (weakest.Health > 0)
         {
-            foreach (var skill in _skillImplementations)
-            {
-                message += skill.AfterAttack(weakest);
-            }
+            message.Append(SkillManager.Instance.OnPlayerPostAttack(weakest));
         }
 
         if (weakest.Health <= 0)
         {
-            message += $" [highlight]{weakest.Name} DIES![/]\n";
+            message.AppendLine($" [highlight]{weakest.Name} DIES![/]");
         }
 
-        return message;
+        return message.ToString();
     }
 
+    // TODO: move into skill manager someday
     public int GetTotalDefense()
     {
         var caparace = PlayerSkillsData.Get("Carapace");
@@ -121,6 +98,14 @@ public class Player : Actor
     public void LevelUp()
     {
         this.Level++;
+        
+        this.Strength++;
+        this.Toughness++;
+        this.Speed++;
+
+        this.TotalHealth += 10;
+        this.Heal(10);
+        
         this.SkillPoints++;
     }
 
@@ -137,17 +122,6 @@ public class Player : Actor
         return result;
     }
 
-    ////////// TODO: MOVE INTO SKILL MANAGER (SINGLETON)
-    public string OnRoundEnd()
-    {
-        var message = new StringBuilder();
-        foreach (var skill in _skillImplementations)
-        {
-            message.AppendLine(skill.OnRoundEnd());
-        }
-        return message.ToString();
-    }
-
     internal Tuple<int, string> Attack(Monster monster, float multiplier = 1.0f)
     {
         var damage = CalculateDamage(monster, multiplier);
@@ -156,16 +130,7 @@ public class Player : Actor
             monster.Health = Math.Max(monster.Health - damage, 0);
         }
         
-        // Apply skills that take effect for EVERY ATTACK
-        var message = "";
-        foreach (var skill in _skillImplementations)
-        {
-            if (monster.Health > 0)
-            {
-                message += skill.OnAttack(monster);
-            }
-        }
-
+        var message = SkillManager.Instance.OnPlayerAttack(monster);
         return new Tuple<int, string>(damage, message);
     }
 

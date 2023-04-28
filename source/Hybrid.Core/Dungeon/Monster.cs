@@ -5,6 +5,7 @@ namespace Hybrid.Core.Dungeon;
 public class Monster : Actor
 {
     public int Cost { get; set; }
+    public string[] Skills;
 
     // Shallow clone.
     public Monster Clone()

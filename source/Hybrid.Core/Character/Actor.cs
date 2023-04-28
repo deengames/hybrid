@@ -1,4 +1,4 @@
-namespace Hybrid.Core.Dungeon;
+namespace Hybrid.Core.Character;
 
 public abstract class Actor
 {

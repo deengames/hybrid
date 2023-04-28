@@ -1,4 +1,5 @@
-using Hybrid.Core.Dungeon;
+using Hybrid.Core.Character;
+using Hybrid.Core.Character.Skills;
 using Hybrid.Game.IO;
 using Spectre.Console;
 
@@ -37,7 +38,7 @@ class FightCommand : ICommand
             }
 
             // Apply round-end skill effects
-            AnsiConsole.Markup(FormatMarkup(player.OnRoundEnd()));
+            AnsiConsole.Markup(FormatMarkup(SkillManager.Instance.OnRoundEnd()));
 
             // Died? Sayounara.
             actors.RemoveAll(a => a.Health <= 0);
