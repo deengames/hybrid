@@ -15,7 +15,6 @@ public static class MonstersData
             Toughness = 3,
             Speed = 1,
             Cost = 1,
-            Skills = new string[] { "Blood Horn" } // testing only
         },
         new Monster
         {
