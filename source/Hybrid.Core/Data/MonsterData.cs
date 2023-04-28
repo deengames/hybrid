@@ -8,7 +8,7 @@ public static class MonstersData
     {
         new Monster
         {
-            Name = "Green Slime", // weak
+            Name = "Dipple", // weak
             TotalHealth = 20,
             Health = 20,
             Strength = 10,
@@ -18,7 +18,17 @@ public static class MonstersData
         },
         new Monster
         {
-            Name = "Blue Slime", // fast
+            Name = "Splame",
+            TotalHealth = 30,
+            Health = 30,
+            Strength = 12,
+            Toughness = 1,
+            Speed = 1,
+            Cost = 1,    
+        },
+        new Monster
+        {
+            Name = "Ragki", // fast
             TotalHealth = 25,
             Health = 25,
             Strength = 7,
@@ -28,7 +38,7 @@ public static class MonstersData
         },
         new Monster
         {
-            Name = "Red Slime", // tank
+            Name = "Hydrapace", // tank
             TotalHealth = 40,
             Health = 40,
             Strength = 16,
