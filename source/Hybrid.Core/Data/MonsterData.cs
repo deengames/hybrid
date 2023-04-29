@@ -59,7 +59,7 @@ public static class MonstersData
         },
         new Monster
         {
-            Name = "Lampyre Beetle",
+            Name = "Lampyre Beetle", // firefly
             TotalHealth = 33,
             Health = 33,
             Strength = 12,
@@ -67,6 +67,17 @@ public static class MonstersData
             Speed = 4,
             Cost = 6,
             Skills = new string[] { "Burn" }
+        },
+        new Monster
+        {
+            Name = "Kaimantis", // praying mantis
+            TotalHealth = 40,
+            Health = 40,
+            Strength = 20,
+            Toughness = 8,
+            Speed = 8,
+            Cost = 8,
+            Skills = new string[] { "Pierce "}
         }
     };
 }

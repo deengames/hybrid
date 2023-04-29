@@ -38,7 +38,11 @@ public class SkillManager
         foreach (var skillName in skills)
         {
             var skill = GetSkillImplementation(skillName);
-            message.Append(skill.PreTurn(self));
+            // Null skills are things like pierce, which are hard-coded in monster.attack
+            if (skill != null)
+            {
+                message.Append(skill.PreTurn(self));
+            }
         }
         return message.ToString();
     }
@@ -49,7 +53,10 @@ public class SkillManager
         foreach (var skillName in skills)
         {
             var skill = GetSkillImplementation(skillName);
-            message.Append(skill.AfterAttack(attacker, target, skills));
+            if (skill != null)
+            {
+                message.Append(skill.AfterAttack(attacker, target, skills));
+            }
         }
         return message.ToString();
     }
@@ -61,7 +68,10 @@ public class SkillManager
         foreach (var skillName in skills)
         {
             var skill = GetSkillImplementation(skillName);
-            message.Append(skill.OnRoundEnd()); // No Actor context needed yet
+            if (skill != null)
+            {
+                message.Append(skill.OnRoundEnd()); // No Actor context needed yet
+            }
         }
         return message.ToString();
     }
@@ -73,7 +83,7 @@ public class SkillManager
         foreach (var skillName in skills)
         {
             var skill = GetSkillImplementation(skillName);
-            if (target.Health > 0)
+            if (skill != null && target.Health > 0)
             {
                 message.Append(skill.OnAttack(attacker, target));
             }
@@ -84,6 +94,13 @@ public class SkillManager
 
     private BaseSkill GetSkillImplementation(string skillName)
     {
-        return _skillImplementations[skillName];
+        if (_skillImplementations.ContainsKey(skillName))
+        {
+            return _skillImplementations[skillName];
+        }
+
+        // Skills like pierce have no implementation; they're hard-coded instead.
+        // See: Monster.Attack
+        return null;
     }
 }

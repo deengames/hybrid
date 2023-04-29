@@ -57,8 +57,13 @@ public class Monster : Actor
     internal override int CalculateDamage(Actor target, float multiplier)
     {
         var player = target as Player;
-        // Changing strength here is uninuitive, because it changes damage in weird ways.
-        var rawDamage = this.Strength - player.GetTotalDefense();
+        // Changing strength here is uninuitive, because it changes damage in weird ways
+        var playerDefense = player.GetTotalDefense();
+        if (this.Skills.Contains("Pierce"))
+        {
+            playerDefense = (int)Math.Floor(playerDefense / 2.0f);
+        }
+        var rawDamage = this.Strength - playerDefense;
         var adjusted = (int)Math.Ceiling(rawDamage * multiplier);
         return Math.Max(adjusted, 0);
     }
