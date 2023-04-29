@@ -37,7 +37,7 @@ public class MonsterGenerator
             while (numMonsters-- > 0)
             {
                 var next = _random.Next(minMonsterIndex, maxMonsterIndex + 1);
-                room.Monsters.Add(data[next]);
+                room.Monsters.Add(data[next].Clone());
             }
         }
     }

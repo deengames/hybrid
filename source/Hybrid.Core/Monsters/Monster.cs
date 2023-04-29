@@ -62,9 +62,4 @@ public class Monster : Actor
         var adjusted = (int)Math.Ceiling(rawDamage * multiplier);
         return Math.Max(adjusted, 0);
     }
-
-    public override string ToString()
-    {
-        return this.Name;
-    }
 }
