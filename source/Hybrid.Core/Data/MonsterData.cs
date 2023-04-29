@@ -1,4 +1,4 @@
-using Hybrid.Core.Dungeon;
+using Hybrid.Core.Monsters;
 
 namespace Hybrid.Core.Data;
 

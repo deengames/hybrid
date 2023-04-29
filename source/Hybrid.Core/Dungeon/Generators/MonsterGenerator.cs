@@ -1,4 +1,5 @@
 using Hybrid.Core.Data;
+using Hybrid.Core.Monsters;
 
 namespace Hybrid.Core.Dungeon.Generators;
 

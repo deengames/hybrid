@@ -1,7 +1,7 @@
 using System.Text;
 using Hybrid.Core.Character.Skills;
 using Hybrid.Core.Data.Skills;
-using Hybrid.Core.Dungeon;
+using Hybrid.Core.Monsters;
 
 namespace Hybrid.Core.Character;
 
