@@ -9,10 +9,6 @@ class StingerSkill : BaseSkill
     
     private Dictionary<Actor, int> venomAmount = new();
 
-    public StingerSkill(Player player) : base(player)
-    {
-    }
-
     public override string OnAttack(Actor target)
     {
         if (!venomAmount.ContainsKey(target))

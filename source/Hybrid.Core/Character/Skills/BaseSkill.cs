@@ -2,13 +2,6 @@ namespace Hybrid.Core.Character.Skills;
 
 abstract class BaseSkill
 {
-    protected readonly Player _player;
-
-    public BaseSkill(Player player)
-    {
-        _player = player;
-    }
-
     /// <summary>
     /// Do something before an actor starts his turn. Return a message if ya want.
     /// </summary>

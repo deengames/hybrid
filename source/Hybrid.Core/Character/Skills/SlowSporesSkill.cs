@@ -2,11 +2,6 @@ namespace Hybrid.Core.Character.Skills;
 
 class SlowSporesSkill : BaseSkill
 {
-    public SlowSporesSkill(Player player) : base(player)
-    {
-
-    }
-
     // WARNING: DESTRUCTIVE AGAINST PLAYER. Speed does not reset after battle!
     public override string AfterAttack(Actor attacker, Actor target, string[] skills)
     {

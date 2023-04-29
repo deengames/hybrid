@@ -4,10 +4,6 @@ class FourArmsSkill : BaseSkill
 {
     private const int NumberOfExtraArms = 2;
 
-    public FourArmsSkill(Player player) : base(player)
-    {
-    }
-    
     public override string AfterAttack(Actor attacker, Actor target, string[] skills)
     {
         var numAttacks = attacker is Player ? NumberOfExtraArms : 1;

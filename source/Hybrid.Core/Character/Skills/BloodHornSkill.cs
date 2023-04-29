@@ -1,14 +1,8 @@
-using Hybrid.Core.Dungeon;
-
 namespace Hybrid.Core.Character.Skills;
 
 class BloodHornSkill : BaseSkill
 {
     private const float DamageAndHealPercent = 0.5f;
-
-    public BloodHornSkill(Player player) : base(player)
-    {
-    }
 
     override public string AfterAttack(Actor attacker, Actor target, string[] skills)
     {

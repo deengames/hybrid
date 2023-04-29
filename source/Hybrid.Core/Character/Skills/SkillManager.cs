@@ -4,11 +4,11 @@ namespace Hybrid.Core.Character.Skills;
 
 public class SkillManager
 {
-    public static SkillManager Instance { get; private set; }
+    public static SkillManager Instance { get; private set; } = new SkillManager();
 
     private Dictionary<string, BaseSkill> _skillImplementations = new Dictionary<string, BaseSkill>();
 
-    private static Dictionary<string, Type> SkillToType = new()
+    private Dictionary<string, Type> SkillToType = new()
     {
         { "Regeneration", typeof(RegenerationSkill) },
         { "Blood Horn", typeof(BloodHornSkill) },
@@ -17,13 +17,12 @@ public class SkillManager
         { "Stinger", typeof(StingerSkill ) },
     };
 
-    public SkillManager(Player player)
+    private SkillManager()
     {
-        SkillManager.Instance = this;
         foreach (var skillName in SkillToType.Keys)
         {
             var skillType = SkillToType[skillName];
-            var skill = Activator.CreateInstance(skillType, player) as BaseSkill;
+            var skill = Activator.CreateInstance(skillType) as BaseSkill;
             _skillImplementations[skillName] = skill;
         }
     }

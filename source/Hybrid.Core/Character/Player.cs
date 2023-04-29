@@ -19,9 +19,6 @@ public class Player : Actor
         this.Strength = 10;
         this.Toughness = 5;
         this.Speed = 5;
-
-        // Initalize skill manager singleton
-        new SkillManager(this);
     }
 
     /// <summary>

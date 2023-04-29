@@ -15,10 +15,11 @@ public static class MonstersData
             Toughness = 3,
             Speed = 1,
             Cost = 1,
+            Skills = new string[] { "Four Arms" },
         },
         new Monster
         {
-            Name = "Splame",
+            Name = "Spalm",
             TotalHealth = 30,
             Health = 30,
             Strength = 12,
