@@ -2,7 +2,7 @@ namespace Hybrid.Core.Dungeon;
 
 public class Floor
 {
-    public const int FinalFloorNumber = 9;
+    public const int FinalFloorNumber = 7;
     internal const int RoomsWide = 4;
     internal const int RoomsHigh = 4;
     
