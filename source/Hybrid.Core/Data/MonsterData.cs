@@ -78,6 +78,17 @@ public static class MonstersData
             Speed = 8,
             Cost = 8,
             Skills = new string[] { "Pierce "}
+        },
+        new Monster
+        {
+            Name = "Oleander Shroom",
+            TotalHealth = 30,
+            Health = 30,
+            Strength = 18,
+            Toughness = 6,
+            Speed = 8,
+            Cost = 5,
+            Skills = new string[] { "Stinger" }
         }
     };
 }
