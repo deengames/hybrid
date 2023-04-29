@@ -56,6 +56,17 @@ public static class MonstersData
             Speed = 12,
             Cost = 4,
             Skills = new string[] { "Blood Horn" }
+        },
+        new Monster
+        {
+            Name = "Lampyre Beetle",
+            TotalHealth = 33,
+            Health = 33,
+            Strength = 12,
+            Toughness = 6,
+            Speed = 4,
+            Cost = 6,
+            Skills = new string[] { "Burn" }
         }
     };
 }
