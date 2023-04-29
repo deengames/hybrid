@@ -15,6 +15,7 @@ class StoryScene : IScene
         AnsiConsole.MarkupLine($"\"You shouldn't have any problems breathing, thanks to the infusion,\" the pilot says, eyeing you from the corner of his eyes. He mutters something under his breath, and you catch the words [{Colours.ThemeHighlight}]\"freak\" and \"genes.\"[/] He tosses a [{Colours.ThemeDark}]VX5 comm unit[/] to you.");
         AnsiConsole.MarkupLine("\"Report back when you've found and killed the queen,\" he says. Without waiting for a reply, he stabs the ejection button, and you hurtle toward the planetoid.");
         AnsiConsole.MarkupLine($"A short while later, you clamber out of the pod, stretching for the first time. You feel ... [{Colours.ThemeHighlight}]strange. Stronger. Faster.[/] You remember your briefing, and quickly identify the NIM-3 crater. You stand at the cusp. (Press any key to continue)");
+        AnsiConsole.WriteLine();
         System.Console.ReadKey(true);
 
         Game.Instance.ChangeScene(new SkillSelectScene(Game.Instance.Player.Skills));
