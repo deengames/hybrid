@@ -51,12 +51,16 @@ public class Monster : Actor
     override public Tuple<int, string> MeleeAttack(Actor target)
     {
         var player = target as Player;
-        var damage = Math.Max(this.Strength - player.GetTotalDefense(), 0);
-        if (damage > 0)
-        {
-            player.Health = Math.Max(player.Health - damage, 0);
-        }
-        return new Tuple<int, string>(damage, string.Empty);
+        return this.Attack(player, this.Skills);
+    }
+
+    internal override int CalculateDamage(Actor target, float multiplier)
+    {
+        var player = target as Player;
+        // Changing strength here is uninuitive, because it changes damage in weird ways.
+        var rawDamage = this.Strength - player.GetTotalDefense();
+        var adjusted = (int)Math.Ceiling(rawDamage * multiplier);
+        return Math.Max(adjusted, 0);
     }
 
     public override string ToString()

@@ -46,7 +46,7 @@ public abstract class Actor
         return this.Toughness + this.ToughnessModifier;
     }
 
-    private int CalculateDamage(Actor target, float multiplier)
+    internal virtual int CalculateDamage(Actor target, float multiplier)
     {
         // Changing strength here is uninuitive, because it changes damage in weird ways.
         var rawDamage = this.Strength - target.GetToughness();
