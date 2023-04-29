@@ -1,6 +1,5 @@
 using System.Text;
 using Hybrid.Core.Character;
-using Hybrid.Core.Character.Skills;
 
 namespace Hybrid.Core.Monsters;
 

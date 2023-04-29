@@ -1,6 +1,6 @@
-using Hybrid.Core.Character.Skills;
+using Hybrid.Core.Skills.Actors;
 
-namespace Hybrid.Core.Monsters.Skills;
+namespace Hybrid.Core.Skills.Monsters;
 
 class BurnSkill : BaseSkill
 {

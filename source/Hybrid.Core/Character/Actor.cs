@@ -1,5 +1,3 @@
-using Hybrid.Core.Character.Skills;
-
 namespace Hybrid.Core.Character;
 
 public abstract class Actor

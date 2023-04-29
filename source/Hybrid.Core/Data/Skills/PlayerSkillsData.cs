@@ -1,4 +1,4 @@
-using Hybrid.Core.Character.Skills;
+using Hybrid.Core.Skills.Actors;
 
 namespace Hybrid.Core.Data.Skills;
 

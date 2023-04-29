@@ -1,4 +1,6 @@
-namespace Hybrid.Core.Character.Skills;
+using Hybrid.Core.Character;
+
+namespace Hybrid.Core.Skills.Actors;
 
 class BloodHornSkill : BaseSkill
 {
@@ -16,7 +18,7 @@ class BloodHornSkill : BaseSkill
         var toReturn = $"[highlight]{attacker.Name}[/] stab(s) [dark]{target.Name}[/] with a probiscous, damaging and healing for [highlight]{pokeDamage}[/] health.";
         if (!string.IsNullOrWhiteSpace(result.Item2))
         {
-            toReturn += "\n{result.Item2}";
+            toReturn += $"\n{result.Item2}";
         }
         return toReturn;
     }

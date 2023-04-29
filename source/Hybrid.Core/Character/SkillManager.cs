@@ -1,6 +1,8 @@
 using System.Text;
+using Hybrid.Core.Skills.Actors;
+using Hybrid.Core.Skills.Player;
 
-namespace Hybrid.Core.Character.Skills;
+namespace Hybrid.Core.Character;
 
 public class SkillManager
 {

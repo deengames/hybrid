@@ -1,6 +1,7 @@
 using System.Text;
+using Hybrid.Core.Character;
 
-namespace Hybrid.Core.Character.Skills;
+namespace Hybrid.Core.Skills.Actors;
 
 class StingerSkill : BaseSkill
 {

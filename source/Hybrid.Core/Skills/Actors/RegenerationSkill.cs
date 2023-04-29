@@ -1,4 +1,6 @@
-namespace Hybrid.Core.Character.Skills;
+using Hybrid.Core.Character;
+
+namespace Hybrid.Core.Skills.Actors;
 
 class RegenerationSkill : BaseSkill
 {

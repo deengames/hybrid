@@ -1,4 +1,7 @@
-namespace Hybrid.Core.Character.Skills;
+using Hybrid.Core.Character;
+using Hybrid.Core.Skills.Actors;
+
+namespace Hybrid.Core.Skills.Player;
 
 class SlowSporesSkill : BaseSkill
 {

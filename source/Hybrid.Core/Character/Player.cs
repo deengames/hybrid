@@ -1,5 +1,4 @@
 using System.Text;
-using Hybrid.Core.Character.Skills;
 using Hybrid.Core.Data.Skills;
 using Hybrid.Core.Monsters;
 
