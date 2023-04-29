@@ -11,7 +11,7 @@ class LookCommand : ICommand
         var currentFloor = Game.Instance.CurrentFloor;
 
         AnsiConsole.MarkupLine($"You stand in [{Colours.ThemeDark}]in ({currentFloor.CurrentRoom.X}, {currentFloor.CurrentRoom.Y}).[/]");
-        if (currentFloor.CurrentRoom == currentFloor.StairsRoom)
+        if (currentFloor.CurrentRoom == currentFloor.StairsRoom && currentFloor.FloorNumber != Floor.FinalFloorNumber)
         {
             AnsiConsole.MarkupLine($"You spy a [{Colours.ThemeHighlight}]deep chasm[/] leading to the [{Colours.ThemeDark}]next subterranean layer[/]. (Type d to descend.)");
         }
@@ -34,7 +34,13 @@ class LookCommand : ICommand
             }
             else
             {
-                AnsiConsole.MarkupLine($"There is a [{Colours.ThemeHighlight}]{currentRoom.Monsters.Single().Name}[/] in this room.");
+                AnsiConsole.MarkupLine($"There is a(n) [{Colours.ThemeHighlight}]{currentRoom.Monsters.Single().Name}[/] in this room.");
+            }
+
+            var isQueenHere = currentRoom.Monsters.Any(m => m.Name.Contains("Queen"));
+            if (isQueenHere)
+            {
+                AnsiConsole.MarkupLine($"[{Colours.QueenSpeech}]The Queen[/] towers over you, watching with her multitude of eyes.");
             }
         }
     }

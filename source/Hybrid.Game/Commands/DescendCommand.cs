@@ -15,7 +15,7 @@ class DescendCommand : ICommand
         {
             if (currentFloor.FloorNumber == Floor.FinalFloorNumber)
             {
-                Game.Instance.ChangeScene(new EndGameScene());
+                AnsiConsole.WriteLine("This is the bottom layer of Nemosa-7.");
                 return;
             }
 
@@ -29,6 +29,10 @@ class DescendCommand : ICommand
             AnsiConsole.MarkupLine($"You descend to [{Colours.ThemeHighlight}]{Game.Instance.CurrentFloor.FloorNumber}B[/].");
             AnsiConsole.MarkupLine($"You gained a level! Your strength, toughness, and agility increased by [{Colours.ThemeHighlight}]1 each[/]. You gained [{Colours.ThemeHighlight}]1[/] skill point.");
             Game.Instance.Player.LevelUp();
+            if (Game.Instance.CurrentFloor.FloorNumber == Floor.FinalFloorNumber)
+            {
+                AnsiConsole.MarkupLine($"You reach the last underground layer of the planetoid. You sense a [{Colours.QueenSpeech}]strange presence[/] nearby.");
+            }
             return;
         }
 

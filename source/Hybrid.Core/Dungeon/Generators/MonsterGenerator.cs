@@ -40,6 +40,18 @@ public class MonsterGenerator
                 room.Monsters.Add(data[next].Clone());
             }
         }
+        
+        GenerateBoss(floor);
+    }
+
+    private static void GenerateBoss(Floor floor)
+    {
+        if (floor.FloorNumber != Floor.FinalFloorNumber)
+        {
+            return;
+        }
+
+        floor.StairsRoom.Monsters.Add(new Queen());
     }
 
     private static void GenerateMonstersByPoints(Monster[] data, int minMonsterIndex, int maxMonsterIndex, Room room, int totalPoints)

@@ -1,6 +1,7 @@
 using Hybrid.Core.Character;
 using Hybrid.Core.Skills;
 using Hybrid.Game.IO;
+using Hybrid.Game.Story;
 using Spectre.Console;
 
 namespace Hybrid.Game.Commands;
@@ -52,11 +53,18 @@ class FightCommand : ICommand
 
         if (player.Health > 0)
         {
-            AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]You vanquish[/] the monsters, with [{Colours.ThemeDark}]{player.Health}/{player.TotalHealth}[/] health. Your wounds knit close.");
+            if (Game.Instance.CurrentFloor.CurrentRoom.Monsters.Any(m => m.Name.Contains("Queen")))
+            {
+                Game.Instance.ChangeScene(new EndGameScene());
+            }
+            else
+            {
+                AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]You vanquish[/] the monsters, with [{Colours.ThemeDark}]{player.Health}/{player.TotalHealth}[/] health. Your wounds knit close.");
 
-            player.Heal(player.TotalHealth);
-            Game.Instance.CurrentFloor.CurrentRoom.Monsters.Clear();
-            new LookCommand().Run();
+                player.Heal(player.TotalHealth);
+                Game.Instance.CurrentFloor.CurrentRoom.Monsters.Clear();
+                new LookCommand().Run();
+            }
         }
         else
         {
