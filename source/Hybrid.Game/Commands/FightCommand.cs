@@ -1,4 +1,5 @@
 using Hybrid.Core.Character;
+using Hybrid.Core.Skills;
 using Hybrid.Game.IO;
 using Spectre.Console;
 

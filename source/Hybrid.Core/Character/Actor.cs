@@ -1,3 +1,5 @@
+using Hybrid.Core.Skills;
+
 namespace Hybrid.Core.Character;
 
 public abstract class Actor
@@ -6,7 +8,10 @@ public abstract class Actor
     public int Health { get; internal set; }
     public int TotalHealth { get; internal set; }
     public int Strength { get; internal set; }
-    public int Toughness { get; internal set; }
+    internal int Toughness { get; set; }
+
+    // Temporary toughness change based on burns (negative), boosts (positive).
+    public int ToughnessModifier { get; set; }
     public int Speed { get; internal set; }
     public string[] Skills { get; set; } = new string[0];
 
@@ -26,7 +31,7 @@ public abstract class Actor
             target.Health = Math.Max(target.Health - damage, 0);
         }
         
-        var message = SkillManager.Instance.OnAttack(target, skills);
+        var message = SkillManager.Instance.OnAttack(this, target, skills);
         return new Tuple<int, string>(damage, message);
     }
 
@@ -36,10 +41,15 @@ public abstract class Actor
         this.Health += amount;
     }
 
+    public int GetToughness()
+    {
+        return this.Toughness + this.ToughnessModifier;
+    }
+
     private int CalculateDamage(Actor target, float multiplier)
     {
         // Changing strength here is uninuitive, because it changes damage in weird ways.
-        var rawDamage = this.Strength - target.Toughness;
+        var rawDamage = this.Strength - target.GetToughness();
         var adjusted = (int)Math.Ceiling(rawDamage * multiplier);
         return Math.Max(adjusted, 0);
     }

@@ -1,6 +1,7 @@
 using System.Text;
 using Hybrid.Core.Data.Skills;
 using Hybrid.Core.Monsters;
+using Hybrid.Core.Skills;
 
 namespace Hybrid.Core.Character;
 
@@ -55,7 +56,8 @@ public class Player : Actor
         // PRE-skills
         var message = new StringBuilder();
         message.Append(SkillManager.Instance.OnPreAttack(this, this.Skills));
-
+        
+        // ON-attack skills
         var result = this.MeleeAttack(weakest);
         var damage = result.Item1;
         message.AppendLine($"[highlight]You[/] attack the [dark]{weakest.Name}[/] for [highlight]{damage}[/] damage.");
@@ -83,7 +85,7 @@ public class Player : Actor
     public int GetTotalDefense()
     {
         var caparace = PlayerSkillsData.Get("Carapace");
-        var toReturn = this.Toughness;
+        var toReturn = this.GetToughness();
         if (this.Skills.Contains(caparace.Name))
         {
             toReturn += (this.Level * PlayerSkillsData.CarapaceToughnessPerLevel);

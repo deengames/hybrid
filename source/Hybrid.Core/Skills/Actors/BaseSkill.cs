@@ -21,7 +21,7 @@ abstract class BaseSkill
     }
 
     // Called on each and every single attack
-    public virtual string OnAttack(Actor target)
+    public virtual string OnAttack(Actor attacker, Actor target)
     {
         return string.Empty;
     }

@@ -10,7 +10,7 @@ class StingerSkill : BaseSkill
     
     private Dictionary<Actor, int> venomAmount = new();
 
-    public override string OnAttack(Actor target)
+    public override string OnAttack(Actor attacker, Actor target)
     {
         if (!venomAmount.ContainsKey(target))
         {
@@ -19,7 +19,7 @@ class StingerSkill : BaseSkill
 
         venomAmount[target] += VenomPerStrike;
 
-        return $"Stingers stab into and [dark]poison {target.Name}[/] [highlight]{VenomPerStrike}[/] times!\n";
+        return $"{attacker.Name}'s stingers stab into and [dark]poison {target.Name}[/] [highlight]{VenomPerStrike}[/] times!\n";
     }
 
     public override string OnRoundEnd()

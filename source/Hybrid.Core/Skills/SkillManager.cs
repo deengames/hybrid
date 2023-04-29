@@ -1,8 +1,10 @@
 using System.Text;
+using Hybrid.Core.Character;
 using Hybrid.Core.Skills.Actors;
+using Hybrid.Core.Skills.Monsters;
 using Hybrid.Core.Skills.Player;
 
-namespace Hybrid.Core.Character;
+namespace Hybrid.Core.Skills;
 
 public class SkillManager
 {
@@ -15,8 +17,9 @@ public class SkillManager
         { "Regeneration", typeof(RegenerationSkill) },
         { "Blood Horn", typeof(BloodHornSkill) },
         { "Four Arms", typeof(FourArmsSkill) },
-        { "Slow Spores", typeof(SlowSporesSkill ) },
-        { "Stinger", typeof(StingerSkill ) },
+        { "Slow Spores", typeof(SlowSporesSkill) },
+        { "Stinger", typeof(StingerSkill) },
+        { "Burn", typeof(BurnSkill) },
     };
 
     private SkillManager()
@@ -64,7 +67,7 @@ public class SkillManager
     }
 
     // Apply skills that take effect for EVERY ATTACK
-    public string OnAttack(Actor target, string[] skills)
+    public string OnAttack(Actor attacker, Actor target, string[] skills)
     {
         var message = new StringBuilder();
         foreach (var skillName in skills)
@@ -72,7 +75,7 @@ public class SkillManager
             var skill = GetSkillImplementation(skillName);
             if (target.Health > 0)
             {
-                message.Append(skill.OnAttack(target));
+                message.Append(skill.OnAttack(attacker, target));
             }
         }
 

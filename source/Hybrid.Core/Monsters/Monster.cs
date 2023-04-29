@@ -1,5 +1,6 @@
 using System.Text;
 using Hybrid.Core.Character;
+using Hybrid.Core.Skills;
 
 namespace Hybrid.Core.Monsters;
 
@@ -24,10 +25,17 @@ public class Monster : Actor
         // PRE-skills
         var message = new StringBuilder();
         message.Append(SkillManager.Instance.OnPreAttack(this, this.Skills));
-
-        var damage = this.MeleeAttack(player).Item1;        
-        message.Append($"The [dark]{this.Name}[/] attacks [highlight]you[/] for [highlight]{damage}[/] damage.  ");
-
+        
+        // ON-attack skills
+        var result = this.MeleeAttack(player);
+        var damage = result.Item1;        
+        message.Append($"The [dark]{this.Name}[/] attacks [highlight]you[/] for [highlight]{damage}[/] damage. ");
+        if (!string.IsNullOrWhiteSpace(result.Item2))
+        {
+            message.Append(result.Item2);
+        }
+        
+        // POST-skills
         if (player.Health > 0)
         {
             message.Append(SkillManager.Instance.OnPostAttack(this, player, this.Skills));
