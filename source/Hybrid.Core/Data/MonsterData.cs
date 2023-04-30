@@ -42,16 +42,16 @@ public static class MonstersData
             TotalHealth = 40,
             Health = 40,
             Strength = 16,
-            Toughness = 5,
+            Toughness = 4,
             Speed = 4,
             Cost = 5
         },
         new Monster
         {
             Name = "Culiwing", // mosquito
-            TotalHealth = 100,
-            Health = 100,
-            Strength = 15,
+            TotalHealth = 60,
+            Health = 60,
+            Strength = 16,
             Toughness = 1,
             Speed = 12,
             Cost = 4,

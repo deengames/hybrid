@@ -4,7 +4,7 @@ namespace Hybrid.Core.Data.Skills;
 
 public static class PlayerSkillsData
 {
-    public const int CarapaceToughnessPerLevel = 5;
+    public const int CarapaceToughnessPerLevel = 2;
 
     public static SkillData[] AllSkills = new SkillData[]
     {
@@ -22,7 +22,7 @@ public static class PlayerSkillsData
             Species = "Mantidae", // Mantis
             Effect = "Adds two additional attacks per round",
             Description = "Grow two additional powerful mantis-like forearms",
-            LearningCost = 1,
+            LearningCost = 2,
         },
         new SkillData
         {
@@ -38,7 +38,7 @@ public static class PlayerSkillsData
             Species = "Vespidae", // wasp
             Effect = "Each attack inflicts venom. Amount increases per level",
             Description = "Tiny stringers from the Lunartata wasps cover your arms and hands",
-            LearningCost = 2,
+            LearningCost = 3,
         },
         new SkillData
         {
@@ -46,7 +46,7 @@ public static class PlayerSkillsData
             Species = "Culicidae", // mosquito,
             Effect = "Adds an extra attack that heals you",
             Description = "Sprout a long, thin proboscis from your forehad",
-            LearningCost = 2,
+            LearningCost = 1,
         },
         new SkillData
         {
@@ -54,7 +54,7 @@ public static class PlayerSkillsData
             Species = "Fungi",
             Effect = "Decreases a monster's speed every time it attacks you",
             Description = "Release a cloud of Sriped Mycota spores around you",
-            LearningCost = 1,
+            LearningCost = 2,
         }
     };
     
