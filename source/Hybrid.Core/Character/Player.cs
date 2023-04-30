@@ -12,6 +12,9 @@ public class Player : Actor
     public int Level { get; private set; } = 1;
     private int _xp = 0;
 
+    private const int XpPerLevelUp = 20;
+    private const int HealthPerLevelUp = 5;
+
     public Player()
     {
         this.Name = "You";
@@ -102,8 +105,8 @@ public class Player : Actor
         this.Toughness++;
         this.Speed++;
 
-        this.TotalHealth += 10;
-        this.Heal(10);
+        this.TotalHealth += HealthPerLevelUp;
+        this.Heal(HealthPerLevelUp);
         
         this.SkillPoints++;
     }
@@ -134,7 +137,7 @@ public class Player : Actor
         // It's complicated. Because descending levels you up, too.
         var previousXp = _xp;
         this._xp += monster.Cost;
-        if (_xp / 10 > previousXp / 10)
+        if (_xp / XpPerLevelUp > previousXp / XpPerLevelUp)
         {
             this.LevelUp();
             return true;

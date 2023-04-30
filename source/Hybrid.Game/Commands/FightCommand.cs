@@ -71,7 +71,7 @@ class FightCommand : ICommand
             else
             {
                 AnsiConsole.Markup($"[{Colours.ThemeHighlight}]You vanquish[/] the monsters, with [{Colours.ThemeDark}]{player.Health}/{player.TotalHealth}[/] health.");
-                if (player.Health < player.TotalHealth)
+                if (FeatureToggles.FullHealAfterBattles && player.Health < player.TotalHealth)
                 {
                     AnsiConsole.Write("Your wounds knit close.");
                 }
