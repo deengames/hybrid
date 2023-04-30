@@ -45,10 +45,21 @@ class FightCommand : ICommand
             }
 
             // Died? Sayounara.
-            actors.RemoveAll(a => a.Health <= 0);
+            var dead = actors.Where(a => a.Health <= 0);
+            var leveledUp = false;
+            foreach (var corpse in dead)
+            {
+                leveledUp |= player.OnMonsterDied(corpse);
+            }
+            actors.RemoveAll(a => dead.Contains(a));
 
             // Speed can change mid-round
             actors = actors.OrderByDescending(a => a.Speed).ToList();
+
+            if (leveledUp)
+            {
+                AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]You leveled up![/] You gained one of each stat point, and ten total and current health.");
+            }
         }
 
         if (player.Health > 0)

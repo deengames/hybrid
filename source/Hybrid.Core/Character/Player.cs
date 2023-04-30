@@ -10,6 +10,7 @@ public class Player : Actor
     public int SkillPoints { get; private set; } = 5;
     
     public int Level { get; private set; } = 1;
+    private int _xp = 0;
 
     public Player()
     {
@@ -118,5 +119,27 @@ public class Player : Actor
 
         var result = this.Attack(monster, this.Skills);
         return result;
+    }
+
+    // Returns true if we LEVELLED UP~!
+    public bool OnMonsterDied(Actor whoDied)
+    {
+        if (whoDied == null || whoDied == this)
+        {
+            return false;
+        }
+
+        var monster = whoDied as Monster;
+
+        // It's complicated. Because descending levels you up, too.
+        var previousXp = _xp;
+        this._xp += monster.Cost;
+        if (_xp / 10 > previousXp / 10)
+        {
+            this.LevelUp();
+            return true;
+        }
+
+        return false;
     }
 }

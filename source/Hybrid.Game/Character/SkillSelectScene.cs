@@ -1,3 +1,4 @@
+using Hybrid.Core.Character;
 using Hybrid.Core.Data.Skills;
 using Hybrid.Core.Dungeon.Generators;
 using Hybrid.Game.Dungeon;
@@ -21,6 +22,7 @@ class SkillSelectScene : IScene
     {
         var player = Game.Instance.Player;
 
+        ShowStats(player);
         ShowIntro(player.SkillPoints);
         ShowCurrentSkills(player.Skills);
         ListUnlearnedSkills();
@@ -43,6 +45,11 @@ class SkillSelectScene : IScene
         }
 
         Game.Instance.ChangeScene(new ExploreFloorScene());
+    }
+
+    private void ShowStats(Player player)
+    {
+        AnsiConsole.MarkupLine($"You have [{Colours.ThemeHighlight}]{player.TotalHealth} health[/], [{Colours.ThemeHighlight}]{player.Strength}[/] strength, [{Colours.ThemeHighlight}]{player.GetToughness()}[/] toughness, and [{Colours.ThemeHighlight}]{player.Speed}[/] speed.");
     }
 
     private SkillData? AskWhichSkillToLearn()
