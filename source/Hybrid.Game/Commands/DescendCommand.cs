@@ -27,8 +27,13 @@ class DescendCommand : ICommand
 
             Game.Instance.CurrentFloor = FloorGenerator.Generate(currentFloor.FloorNumber + 1);
             AnsiConsole.MarkupLine($"You descend to [{Colours.ThemeHighlight}]{Game.Instance.CurrentFloor.FloorNumber}B[/].");
-            AnsiConsole.MarkupLine($"You gained a level! Your strength, toughness, and agility increased by [{Colours.ThemeHighlight}]1 each[/]. You gained [{Colours.ThemeHighlight}]1[/] skill point.");
-            Game.Instance.Player.LevelUp();
+            
+            if (FeatureToggles.LevelUpOnDescend)
+            {
+                AnsiConsole.MarkupLine($"You gained a level! Your strength, toughness, and agility increased by [{Colours.ThemeHighlight}]1 each[/]. You gained [{Colours.ThemeHighlight}]1[/] skill point.");
+                Game.Instance.Player.LevelUp();
+            }
+            
             if (Game.Instance.CurrentFloor.FloorNumber == Floor.FinalFloorNumber)
             {
                 AnsiConsole.MarkupLine($"You reach the last underground layer of the planetoid. You sense a [{Colours.QueenSpeech}]strange presence[/] nearby.");

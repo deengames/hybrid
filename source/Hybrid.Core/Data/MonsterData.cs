@@ -51,8 +51,8 @@ public static class MonstersData
             Name = "Culiwing", // mosquito
             TotalHealth = 100,
             Health = 100,
-            Strength = 16,
-            Toughness = 4,
+            Strength = 17,
+            Toughness = 3,
             Speed = 12,
             Cost = 4,
             Skills = new string[] { "Blood Horn" }
@@ -62,7 +62,7 @@ public static class MonstersData
             Name = "Lampyre Beetle", // firefly
             TotalHealth = 33,
             Health = 33,
-            Strength = 20,
+            Strength = 25,
             Toughness = 6,
             Speed = 4,
             Cost = 6,
@@ -73,7 +73,7 @@ public static class MonstersData
             Name = "Kaimantis", // praying mantis
             TotalHealth = 40,
             Health = 40,
-            Strength = 25,
+            Strength = 30,
             Toughness = 8,
             Speed = 8,
             Cost = 8,
@@ -84,10 +84,10 @@ public static class MonstersData
             Name = "Oleander Shroom",
             TotalHealth = 30,
             Health = 30,
-            Strength = 18,
-            Toughness = 10,
+            Strength = 25,
+            Toughness = 15,
             Speed = 8,
-            Cost = 5,
+            Cost = 7,
             Skills = new string[] { "Stinger" }
         }
     };

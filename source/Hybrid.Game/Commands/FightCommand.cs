@@ -81,6 +81,7 @@ class FightCommand : ICommand
                 {
                     player.Heal(player.TotalHealth);
                 }
+                player.ToughnessModifier = 0; // remove burns, boosts
                 Game.Instance.CurrentFloor.CurrentRoom.Monsters.Clear();
                 new LookCommand().Run();
             }

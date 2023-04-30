@@ -18,6 +18,9 @@ class HelpCommand : ICommand
         }
         AnsiConsole.WriteLine("  Choose skills carefully, they make a big difference.");
         AnsiConsole.WriteLine("  You gain experience points and level up when you kill enough monsters.");
-        AnsiConsole.WriteLine("  You also gain a level every time you descend down a floor.");
+        if (FeatureToggles.LevelUpOnDescend)
+        {
+            AnsiConsole.WriteLine("  You also gain a level every time you descend down a floor.");
+        }
     }
 }
