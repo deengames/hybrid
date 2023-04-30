@@ -4,7 +4,7 @@ namespace Hybrid.Core.Skills.Actors;
 
 class RegenerationSkill : BaseSkill
 {
-    internal const float HealthPerRound = 0.05f;
+    internal const float HealthPerRound = 0.10f;
     
     override public string PreTurn(Actor self)
     {
