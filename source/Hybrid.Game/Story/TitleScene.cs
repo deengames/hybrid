@@ -8,7 +8,7 @@ namespace Hybrid.Game.Story
     {
         public void Show()
         {
-            AudioPlayer.Play("random");
+            AudioPlayer.Play("hybrid");
             AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]Hyb[/][{Colours.ThemeDark}]rid[/]");
             AnsiConsole.MarkupLine("Press any key to start a new game, or q to quit.");
             var key = System.Console.ReadKey(true);
