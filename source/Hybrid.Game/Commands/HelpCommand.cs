@@ -12,9 +12,12 @@ class HelpCommand : ICommand
         AnsiConsole.WriteLine();
 
         AnsiConsole.MarkupLine($"[{Colours.ThemeHighlight}]Tips:[/]");
-        AnsiConsole.WriteLine("  1) You return to full health before each battle.");
-        AnsiConsole.WriteLine("  2) Choose skills carefully, they make a big difference.");
-        AnsiConsole.WriteLine("  3) You gain experience points and level up when you kill enough monsters.");
-        AnsiConsole.WriteLine("  4) You also gain a level every time you descend down a floor.");
+        if (FeatureToggles.FullHealAfterBattles)
+        {
+            AnsiConsole.WriteLine("  You return to full health before each battle.");
+        }
+        AnsiConsole.WriteLine("  Choose skills carefully, they make a big difference.");
+        AnsiConsole.WriteLine("  You gain experience points and level up when you kill enough monsters.");
+        AnsiConsole.WriteLine("  You also gain a level every time you descend down a floor.");
     }
 }

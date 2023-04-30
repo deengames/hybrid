@@ -77,7 +77,10 @@ class FightCommand : ICommand
                 }
                 AnsiConsole.WriteLine();
 
-                player.Heal(player.TotalHealth);
+                if (FeatureToggles.FullHealAfterBattles)
+                {
+                    player.Heal(player.TotalHealth);
+                }
                 Game.Instance.CurrentFloor.CurrentRoom.Monsters.Clear();
                 new LookCommand().Run();
             }

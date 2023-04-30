@@ -49,7 +49,13 @@ class SkillSelectScene : IScene
 
     private void ShowStats(Player player)
     {
-        AnsiConsole.MarkupLine($"You have [{Colours.ThemeHighlight}]{player.TotalHealth} health[/], [{Colours.ThemeHighlight}]{player.Strength}[/] strength, [{Colours.ThemeHighlight}]{player.GetToughness()}[/] toughness, and [{Colours.ThemeHighlight}]{player.Speed}[/] speed.");
+        var health = $"[{Colours.ThemeHighlight}]{player.TotalHealth}";
+        if (!FeatureToggles.FullHealAfterBattles)
+        {
+            health = $"[{Colours.ThemeHighlight}]{player.Health}/{player.TotalHealth}";
+        }
+
+        AnsiConsole.MarkupLine($"You are on level [{Colours.ThemeHighlight}]{player.Level}[/]. You have {health}[/] health, [{Colours.ThemeHighlight}]{player.Strength}[/] strength, [{Colours.ThemeHighlight}]{player.GetToughness()}[/] toughness, and [{Colours.ThemeHighlight}]{player.Speed}[/] speed.");
     }
 
     private SkillData? AskWhichSkillToLearn()

@@ -4,7 +4,7 @@ namespace Hybrid.Core.Data.Skills;
 
 public static class PlayerSkillsData
 {
-    public const int CarapaceToughnessPerLevel = 2;
+    public const int CarapaceToughnessPerLevel = 1;
 
     public static SkillData[] AllSkills = new SkillData[]
     {
