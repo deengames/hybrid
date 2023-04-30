@@ -35,7 +35,7 @@ class StingerSkill : BaseSkill
                 
                 if (actor.Health <= 0)
                 {
-                    message.Append($" [highlight]{actor.Name} succumbs to poison and DIES![/]");
+                    message.Append($" [dark]{actor.Name} succumbs to poison[/] and [highlight]DIES![/]");
                 }
 
                 message.AppendLine("");
