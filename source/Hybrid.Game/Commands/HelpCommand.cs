@@ -7,7 +7,7 @@ class HelpCommand : ICommand
 {
     public void Run()
     {
-        AnsiConsole.MarkupLine($"Type [{Colours.ThemeHighlight}]n, e, s, or w[/] to move north, east, south, or west; type [{Colours.ThemeHighlight}]l[/] to look around, and [{Colours.ThemeHighlight}]f[/] to fight automatically. To check what skills you can learn, type [{Colours.ThemeHighlight}]c[/] or [{Colours.ThemeHighlight}]skill[/]. When you find the crater down to the next floor, type [{Colours.ThemeHighlight}]d[/] to descend.");
+        AnsiConsole.MarkupLine($"Type [{Colours.ThemeHighlight}]n, e, s, or w[/] to move north, east, south, or west; type [{Colours.ThemeHighlight}]l[/] to look around, and [{Colours.ThemeHighlight}]f[/] to fight automatically. To check what skills you can learn, type [{Colours.ThemeHighlight}]c[/] or [{Colours.ThemeHighlight}]skill[/]. When you find the crater down to the next floor, you can type [{Colours.ThemeHighlight}]d[/] to descend. Type [{Colours.ThemeHighlight}]ex or examine[/] followed by a monster name, to take a look at that monster's stats.");
 
         AnsiConsole.WriteLine();
 

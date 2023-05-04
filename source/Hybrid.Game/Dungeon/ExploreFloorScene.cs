@@ -48,7 +48,9 @@ class ExploreFloorScene : IScene
     private ICommand? GetCommand(string name)
     {
         name = name.Trim().ToLower();
-        switch (name)
+        var endIndex = name.Contains(' ') ? name.IndexOf(' ') : name.Length;
+        var command = name.Substring(0, endIndex);
+        switch (command)
         {
             case "l":
             case "look":
@@ -75,6 +77,9 @@ class ExploreFloorScene : IScene
             case "c":
             case "character":
                 return new ShowSkillsCommand();
+            case "ex":
+            case "examine":
+                return new ExamineCommand(name);
             case "h":
             case "help":
                 return new HelpCommand();
