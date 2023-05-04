@@ -45,6 +45,7 @@ class Game
     {
         AnsiConsole.ResetColors();
         currentScene = null;
-        Console.WriteLine("Bye!");
+        Console.WriteLine("Bye! (Press any key to end the game.)");
+        System.Console.ReadKey(true);
     }
 }
