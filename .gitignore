@@ -403,5 +403,8 @@ FodyWeavers.xsd
 
 
 ##### custom stuff
-# publishing ips
+# publishing zips
 *.zip
+# sonarz
+.sonarqube
+sonarToken.txt
