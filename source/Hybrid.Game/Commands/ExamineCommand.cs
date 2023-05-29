@@ -20,7 +20,11 @@ class ExamineCommand : ICommand
         } else if (input.StartsWith("ex"))
         {
             index = 2;
+        } else if (input.StartsWith("x"))
+        {
+            index = 1;
         }
+        
         _target = input.Substring(index).Trim();
     }
 

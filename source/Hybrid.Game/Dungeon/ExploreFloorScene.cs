@@ -77,6 +77,7 @@ class ExploreFloorScene : IScene
             case "c":
             case "character":
                 return new ShowSkillsCommand();
+            case "x":
             case "ex":
             case "examine":
                 return new ExamineCommand(name);
