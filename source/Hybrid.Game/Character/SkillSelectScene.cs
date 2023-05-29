@@ -22,7 +22,6 @@ class SkillSelectScene : IScene
     {
         var player = Game.Instance.Player;
 
-        ShowStats(player);
         ShowIntro(player.SkillPoints);
         ShowCurrentSkills(player.Skills);
         ListUnlearnedSkills();
@@ -45,17 +44,6 @@ class SkillSelectScene : IScene
         }
 
         Game.Instance.ChangeScene(new ExploreFloorScene());
-    }
-
-    private void ShowStats(Player player)
-    {
-        var health = $"[{Colours.ThemeHighlight}]{player.TotalHealth}";
-        if (!FeatureToggles.FullHealAfterBattles)
-        {
-            health = $"[{Colours.ThemeHighlight}]{player.Health}/{player.TotalHealth}";
-        }
-
-        AnsiConsole.MarkupLine($"You are on level [{Colours.ThemeHighlight}]{player.Level}[/]. You have {health}[/] health, [{Colours.ThemeHighlight}]{player.Strength}[/] strength, [{Colours.ThemeHighlight}]{player.GetToughness()}[/] toughness, and [{Colours.ThemeHighlight}]{player.Speed}[/] speed.");
     }
 
     private SkillData? AskWhichSkillToLearn()

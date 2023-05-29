@@ -1,5 +1,6 @@
 using System.Text;
 using Hybrid.Core.Character;
+using Hybrid.Core.Monsters;
 
 namespace Hybrid.Core.Skills.Actors;
 
@@ -36,6 +37,11 @@ class StingerSkill : BaseSkill
                 if (actor.Health <= 0)
                 {
                     message.Append($" [dark]{actor.Name} succumbs to poison[/] and [highlight]DIES![/]");
+                    if (actor is Monster)
+                    {
+                        var monster = actor as Monster;
+                        message.Append($" You gain [highlight]{monster.Cost}[/] experience points!");
+                    }
                 }
 
                 message.AppendLine("");

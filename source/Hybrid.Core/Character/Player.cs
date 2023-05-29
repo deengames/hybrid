@@ -10,9 +10,12 @@ public class Player : Actor
     public int SkillPoints { get; private set; } = 5;
     
     public int Level { get; private set; } = 1;
+
+    public int Xp { get { return _xp; } }
+    internal const int XpPerLevelUp = 20;
+
     private int _xp = 0;
 
-    private const int XpPerLevelUp = 20;
     private const int HealthPerLevelUp = 5;
 
     public Player()
@@ -79,7 +82,7 @@ public class Player : Actor
 
         if (weakest.Health <= 0)
         {
-            message.AppendLine($" [highlight]{weakest.Name} DIES![/]");
+            message.AppendLine($" [highlight]{weakest.Name} DIES![/] You gain [highlight]{weakest.Cost}[/] experience points!");
         }
 
         return message.ToString();
@@ -144,5 +147,14 @@ public class Player : Actor
         }
 
         return false;
+    }
+
+    public int XpToLevelUp()
+    {
+        // It's simple, yaar; you level-up every 20 XP. Easy peasy.
+        var currentLevel = Xp / XpPerLevelUp;
+        var nextLevel = currentLevel + 1;
+        var nextXpRequired = nextLevel * XpPerLevelUp;
+        return nextXpRequired - _xp;
     }
 }
