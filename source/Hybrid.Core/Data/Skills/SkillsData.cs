@@ -8,20 +8,13 @@ public static class PlayerSkillsData
 
     public static SkillData[] AllSkills = new SkillData[]
     {
+        // Common
         new SkillData
         {
             Name = "Carapace",
             Species = "Arachanid",
             Effect = $"Increases defense by {CarapaceToughnessPerLevel} per level",
             Description = "Grow a tough exterior carapace like the giant arachanids of Burkaan",
-            LearningCost = 2,
-        },
-        new SkillData
-        {
-            Name = "Four Arms",
-            Species = "Mantidae", // Mantis
-            Effect = "Adds two additional attacks per round",
-            Description = "Grow two additional powerful mantis-like forearms",
             LearningCost = 2,
         },
         new SkillData
@@ -36,7 +29,7 @@ public static class PlayerSkillsData
         {
             Name = "Stinger",
             Species = "Vespidae", // wasp
-            Effect = "Each attack inflicts venom. Amount increases per level",
+            Effect = "Each attack inflicts venom",
             Description = "Tiny stringers from the Lunartata wasps cover your arms and hands",
             LearningCost = 3,
         },
@@ -48,6 +41,15 @@ public static class PlayerSkillsData
             Description = "Sprout a long, thin proboscis from your forehad",
             LearningCost = 1,
         },
+        // Player-only
+        new SkillData
+        {
+            Name = "Four Arms",
+            Species = "Mantidae", // Mantis
+            Effect = "Adds two additional attacks per round",
+            Description = "Grow two additional powerful mantis-like forearms",
+            LearningCost = 2,
+        },
         new SkillData
         {
             Name = "Slow Spores",
@@ -55,7 +57,16 @@ public static class PlayerSkillsData
             Effect = "Decreases a monster's speed every time it attacks you",
             Description = "Release a cloud of Sriped Mycota spores around you",
             LearningCost = 2,
+        },
+        new SkillData
+        {
+            Name = "Ommatidia Eyes",
+            Species = "Vespidae",
+            Effect = $"{(int)(OmmatidiaEyesSkill.CounterAttackProbability * 100)}% chance of counter-attacking when attacked",
+            Description = "Adds several extra compound eyes to your head",
+            LearningCost = 3,
         }
+        // Monster-only: none so far (that need to be here)
     };
     
     public static SkillData Get(string name) => AllSkills.Single(s => s.Name == name);

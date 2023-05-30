@@ -32,6 +32,7 @@ public abstract class Actor
         }
         
         var message = SkillManager.Instance.OnAttack(this, target, skills);
+        message += SkillManager.Instance.OnAttacked(target, this, skills);
         return new Tuple<int, string>(damage, message);
     }
 

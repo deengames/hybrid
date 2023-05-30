@@ -14,11 +14,15 @@ public class SkillManager
 
     private Dictionary<string, Type> SkillToType = new()
     {
+        // Common
         { "Regeneration", typeof(RegenerationSkill) },
         { "Blood Horn", typeof(BloodHornSkill) },
+        { "Stinger", typeof(StingerSkill) },
+        { "Ommatidia Eyes", typeof(OmmatidiaEyesSkill) },
+        // Player-only
         { "Four Arms", typeof(FourArmsSkill) },
         { "Slow Spores", typeof(SlowSporesSkill) },
-        { "Stinger", typeof(StingerSkill) },
+        // Monster-only
         { "Burn", typeof(BurnSkill) },
     };
 
@@ -86,6 +90,22 @@ public class SkillManager
             if (skill != null && target.Health > 0)
             {
                 message.Append(skill.OnAttack(attacker, target));
+            }
+        }
+
+        return message.ToString();
+    }
+
+    // Apply skills that take effect for EVERY TIME YOU ARE ATTACKED
+    public string OnAttacked(Actor attacker, Actor target, string[] skills)
+    {
+        var message = new StringBuilder();
+        foreach (var skillName in skills)
+        {
+            var skill = GetSkillImplementation(skillName);
+            if (skill != null && attacker.Health > 0 && target.Health > 0)
+            {
+                message.Append(skill.OnAttacked(attacker, target));
             }
         }
 
