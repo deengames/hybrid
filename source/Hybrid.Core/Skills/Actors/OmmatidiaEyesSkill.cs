@@ -4,10 +4,18 @@ namespace Hybrid.Core.Skills.Actors;
 
 class OmmatidiaEyesSkill : BaseSkill
 {
-    public static float CounterAttackProbability = 0.5f;
-
-    public override string OnAttacked(Actor attacker, Actor target)
+    internal static readonly float CounterAttackProbability = 0.5f;
+    private static Random _random = new Random();
+    
+    public override string OnAttacked(Actor attacker, Actor target, string[] skills)
     {
-        return $"{target.Name}: WE'RE BEING ATTACKED!";
+        if (_random.NextDouble() >= CounterAttackProbability)
+        {
+            return "";
+        }
+
+        var result = attacker.Attack(target, skills);
+        var damage = result.Item1;
+        return $"[highlight]{attacker.Name}[/] counter-attacks [dark]{target.Name}[/] for [highlight]{damage}[/] damage.\n{result.Item2}";
     }
 }

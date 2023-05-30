@@ -105,7 +105,7 @@ public class SkillManager
             var skill = GetSkillImplementation(skillName);
             if (skill != null && attacker.Health > 0 && target.Health > 0)
             {
-                message.Append(skill.OnAttacked(attacker, target));
+                message.Append(skill.OnAttacked(attacker, target, skills));
             }
         }
 

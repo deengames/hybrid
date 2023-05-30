@@ -23,7 +23,7 @@ abstract class BaseSkill
     }
 
     // Reverse of OnAttack: called when you're under attack.
-    public virtual string OnAttacked(Actor attacker, Actor target)
+    public virtual string OnAttacked(Actor attacker, Actor target, string[] skills)
     {
         return string.Empty;
     }
