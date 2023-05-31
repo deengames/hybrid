@@ -10,6 +10,8 @@ public abstract class Actor
     public int Strength { get; internal set; }
     internal int Toughness { get; set; }
 
+    // Temporary strength change, if you can RAGE.
+    internal int StrengthModifier { get; set; }
     // Temporary toughness change based on burns (negative), boosts (positive).
     public int ToughnessModifier { get; set; }
     public int Speed { get; internal set; }
@@ -32,7 +34,7 @@ public abstract class Actor
         }
         
         var message = SkillManager.Instance.OnAttack(this, target, skills);
-        message += SkillManager.Instance.OnAttacked(this, target, skills);
+        message += SkillManager.Instance.OnAttacked(this, target, target.Skills);
         return new Tuple<int, string>(damage, message);
     }
 
@@ -50,7 +52,7 @@ public abstract class Actor
     internal virtual int CalculateDamage(Actor target, float multiplier)
     {
         // Changing strength here is uninuitive, because it changes damage in weird ways.
-        var rawDamage = this.Strength - target.GetToughness();
+        var rawDamage = (this.Strength + this.StrengthModifier) - target.GetToughness();
         var adjusted = (int)Math.Ceiling(rawDamage * multiplier);
         return Math.Max(adjusted, 0);
     }

@@ -33,4 +33,10 @@ abstract class BaseSkill
     {
         return string.Empty;
     }
+
+    // Called when the battle ends. Victory only.
+    public virtual string OnBattleEnd()
+    {
+        return string.Empty;
+    }
 }

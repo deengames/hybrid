@@ -22,6 +22,7 @@ public class SkillManager
         // Player-only
         { "Four Arms", typeof(FourArmsSkill) },
         { "Slow Spores", typeof(SlowSporesSkill) },
+        { "Rage", typeof(RageSkill) },
         // Monster-only
         { "Burn", typeof(BurnSkill) },
     };
@@ -75,6 +76,21 @@ public class SkillManager
             if (skill != null)
             {
                 message.Append(skill.OnRoundEnd()); // No Actor context needed yet
+            }
+        }
+        return message.ToString();
+    }
+
+    // Applied once at the end of battle - victory only.
+    public string OnBattleEnd(string[] skills)
+    {
+        var message = new StringBuilder();
+        foreach (var skillName in skills)
+        {
+            var skill = GetSkillImplementation(skillName);
+            if (skill != null)
+            {
+                message.Append(skill.OnBattleEnd()); // No Actor context needed yet
             }
         }
         return message.ToString();

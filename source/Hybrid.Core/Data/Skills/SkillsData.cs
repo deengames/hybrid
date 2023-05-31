@@ -20,7 +20,7 @@ public static class PlayerSkillsData
         new SkillData
         {
             Name = "Regeneration",
-            Species = "Blattodea", // Cockroach
+            Species = "Blattodea", // cockroach
             Effect = $"Regenerate {(int)(RegenerationSkill.HealthPerRound * 100)}% of your total health per round",
             Description = "With the genes of the  \"unkillable\" Red Spotted Cockroach, your body recovers in battle",
             LearningCost = 3,
@@ -64,6 +64,14 @@ public static class PlayerSkillsData
             Species = "Vespidae",
             Effect = $"{(int)(OmmatidiaEyesSkill.CounterAttackProbability * 100)}% chance of counter-attacking when attacked",
             Description = "Adds several extra compound eyes to your head",
+            LearningCost = 3,
+        },
+        new SkillData
+        {
+            Name = "Rage",
+            Species = "Mantidae",
+            Effect = $"Increases strength by {RageSkill.StrengthGainPerHurt} when hit",
+            Description = "Your pores secrete hormones that drive you into a rage",
             LearningCost = 3,
         }
         // Monster-only: none so far (that need to be here)

@@ -64,6 +64,11 @@ class FightCommand : ICommand
 
         if (player.Health > 0)
         {
+            foreach (var actor in actors)
+            {
+                AnsiConsole.Markup(FormatMarkup(SkillManager.Instance.OnBattleEnd(actor.Skills)));
+            }
+
             if (Game.Instance.CurrentFloor.CurrentRoom.Monsters.Any(m => m.Name.Contains("Queen")))
             {
                 Game.Instance.ChangeScene(new EndGameScene());
