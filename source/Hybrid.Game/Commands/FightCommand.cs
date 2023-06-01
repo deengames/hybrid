@@ -43,6 +43,12 @@ class FightCommand : ICommand
             {
                 AnsiConsole.Markup(FormatMarkup(SkillManager.Instance.OnRoundEnd(actor.Skills)));
             }
+            
+
+            // Display once, not once per skill or once per actor
+            AnsiConsole.Markup(VenomManager.OnRoundEnd()
+                .Replace("[dark]", $"[{Colours.ThemeDark}]")
+                .Replace("[highlight]", $"[{Colours.ThemeHighlight}]"));
 
             // Died? Sayounara.
             var dead = actors.Where(a => a.Health <= 0);

@@ -23,6 +23,7 @@ public class SkillManager
         { "Four Arms", typeof(FourArmsSkill) },
         { "Slow Spores", typeof(SlowSporesSkill) },
         { "Rage", typeof(RageSkill) },
+        { "Amotoxic Flesh", typeof(AmotoxicFleshSkill )},
         // Monster-only
         { "Burn", typeof(BurnSkill) },
     };

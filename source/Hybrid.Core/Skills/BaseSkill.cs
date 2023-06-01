@@ -1,6 +1,6 @@
 using Hybrid.Core.Character;
 
-namespace Hybrid.Core.Skills.Actors;
+namespace Hybrid.Core;
 
 abstract class BaseSkill
 {

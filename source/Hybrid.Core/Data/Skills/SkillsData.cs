@@ -14,7 +14,7 @@ public static class PlayerSkillsData
             Name = "Carapace",
             Species = "Arachanid",
             Effect = $"Increases defense by {CarapaceToughnessPerLevel} per level",
-            Description = "Grow a tough exterior carapace like the giant arachanids of Burkaan",
+            Description = "Grow a tough exterior carapace like the giant spiders of Burkaan",
             LearningCost = 2,
         },
         new SkillData
@@ -73,6 +73,14 @@ public static class PlayerSkillsData
             Effect = $"Increases strength by {RageSkill.StrengthGainPerHurt} when hit",
             Description = "Your pores secrete hormones that drive you into a rage",
             LearningCost = 3,
+        },
+        new SkillData
+        {
+            Name = "Amotoxic Flesh",
+            Species = "Fungi",
+            Effect = "Inflict poison when attacked",
+            Description = "Secrete amotoxins from your skin like the Death Cap mushrooms of Terra",
+            LearningCost = 2,
         }
         // Monster-only: none so far (that need to be here)
     };
