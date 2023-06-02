@@ -45,7 +45,7 @@ public static class PlayerSkillsData
         new SkillData
         {
             Name = "Four Arms",
-            Species = "Mantidae", // Mantis
+            Species = "Mantidae", // mantis
             Effect = "Adds two additional attacks per round",
             Description = "Grow two additional powerful mantis-like forearms",
             LearningCost = 2,
@@ -81,6 +81,13 @@ public static class PlayerSkillsData
             Effect = "Inflict poison when attacked",
             Description = "Secrete amotoxins from your skin like the Death Cap mushrooms of Terra",
             LearningCost = 2,
+        },
+        new SkillData
+        {
+            Name = "Raptor Legs",
+            Species = "Dromaeosaurid",
+            Effect = $"Deals {RaptorLegsSkill.DamagePerLevel} damage, per level, to all monsters, each round of battle",
+            Description = "Your legs bulge and extend with three long, sharp claws."
         }
         // Monster-only: none so far (that need to be here)
     };

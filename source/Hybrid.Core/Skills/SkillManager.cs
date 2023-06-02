@@ -24,6 +24,7 @@ public class SkillManager
         { "Slow Spores", typeof(SlowSporesSkill) },
         { "Rage", typeof(RageSkill) },
         { "Amotoxic Flesh", typeof(AmotoxicFleshSkill )},
+        { "Raptor Legs", typeof(RaptorLegsSkill )},
         // Monster-only
         { "Burn", typeof(BurnSkill) },
     };
@@ -68,7 +69,7 @@ public class SkillManager
     }
 
     // Applied once at the end of a round
-    public string OnRoundEnd(string[] skills)
+    public string OnRoundEnd(string[] skills, IEnumerable<Actor> actors)
     {
         var message = new StringBuilder();
         foreach (var skillName in skills)
@@ -76,7 +77,7 @@ public class SkillManager
             var skill = GetSkillImplementation(skillName);
             if (skill != null)
             {
-                message.Append(skill.OnRoundEnd()); // No Actor context needed yet
+                message.Append(skill.OnRoundEnd(actors));
             }
         }
         return message.ToString();

@@ -29,7 +29,7 @@ abstract class BaseSkill
     }
 
     // Called after a round of combat. Used for, like, regen.
-    public virtual string OnRoundEnd()
+    public virtual string OnRoundEnd(IEnumerable<Actor> actors)
     {
         return string.Empty;
     }

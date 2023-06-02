@@ -28,14 +28,18 @@ public abstract class Actor
     public Tuple<int, string> Attack(Actor target, string[] skills, float multiplier = 1.0f)
     {
         var damage = CalculateDamage(target, multiplier);
-        if (damage > 0)
-        {
-            target.Health = Math.Max(target.Health - damage, 0);
-        }
-        
+        target.TakeDamage(damage);        
         var message = SkillManager.Instance.OnAttack(this, target, skills);
         message += SkillManager.Instance.OnAttacked(this, target, target.Skills);
         return new Tuple<int, string>(damage, message);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (damage > 0)
+        {
+            this.Health = Math.Max(this.Health - damage, 0);
+        }
     }
 
     public void Heal(int recovery)

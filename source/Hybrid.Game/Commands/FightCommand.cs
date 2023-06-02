@@ -41,7 +41,7 @@ class FightCommand : ICommand
             // Apply round-end skill effects
             foreach (var actor in actors)
             {
-                AnsiConsole.Markup(FormatMarkup(SkillManager.Instance.OnRoundEnd(actor.Skills)));
+                AnsiConsole.Markup(FormatMarkup(SkillManager.Instance.OnRoundEnd(actor.Skills, actors)));
             }
             
 

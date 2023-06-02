@@ -54,6 +54,7 @@ public class Monster : Actor
         return this.Attack(player, this.Skills);
     }
 
+    // Calculates the damage this instance inflicts against target
     internal override int CalculateDamage(Actor target, float multiplier)
     {
         var player = target as Player;
