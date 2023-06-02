@@ -87,7 +87,8 @@ public static class PlayerSkillsData
             Name = "Raptor Legs",
             Species = "Dromaeosaurid",
             Effect = $"Deals {RaptorLegsSkill.DamagePerLevel} damage, per level, to all monsters, each round of battle",
-            Description = "Your legs bulge and extend with three long, sharp claws."
+            Description = "Your legs bulge and extend with three long, sharp claws.",
+            LearningCost = 1,
         }
         // Monster-only: none so far (that need to be here)
     };
