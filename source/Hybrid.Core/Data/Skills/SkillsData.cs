@@ -89,6 +89,13 @@ public static class PlayerSkillsData
             Effect = $"Deals {RaptorLegsSkill.DamagePerLevel} damage, per level, to all monsters, each round of battle",
             Description = "Your legs bulge and extend with three long, sharp claws.",
             LearningCost = 1,
+        },
+        new SkillData
+        {
+            Name = "Honeycomb Cells",
+            Species = "Bombini", // honey bees, mostly
+            Effect = $"Deals {HoneycombCellsSkill.DamageOnCharge} damage to all monsters after you get hit {HoneycombCellsSkill.HitsToCharge} times",
+            Description = "Your cells reshape themselves into honeycombs and absorb kinetic energy"
         }
         // Monster-only: none so far (that need to be here)
     };

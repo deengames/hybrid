@@ -25,6 +25,7 @@ public class SkillManager
         { "Rage", typeof(RageSkill) },
         { "Amotoxic Flesh", typeof(AmotoxicFleshSkill )},
         { "Raptor Legs", typeof(RaptorLegsSkill )},
+        { "Honeycomb Cells", typeof(HoneycombCellsSkill )},
         // Monster-only
         { "Burn", typeof(BurnSkill) },
     };
