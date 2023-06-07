@@ -14,13 +14,28 @@ class HoneycombCellsSkill : BaseSkill
         if (target is Hybrid.Core.Character.Player)
         {
             _hitsSoFar++;
-            if (_hitsSoFar >= HitsToCharge)
-            {
-                _hitsSoFar -= HitsToCharge;
-                return $"Your cells explode, hitting all monsters for {DamageOnCharge} damage!";
-            }
         }
 
         return "";
+    }
+
+    public override string OnRoundEnd(IEnumerable<Actor> actors)
+    {
+        if (_hitsSoFar < HitsToCharge)
+        {
+            return string.Empty;
+        }
+
+        _hitsSoFar -= HitsToCharge;
+
+        var player = actors.Single(a => a.GetType() == typeof(Character.Player)) as Character.Player;
+        var monsters = actors.Where(a => a != player);
+
+        foreach (var monster in monsters)
+        {
+            monster.TakeDamage(DamageOnCharge);
+        }
+
+        return $"Your cells explode, hitting all monsters for {DamageOnCharge} damage!\n";
     }
 }

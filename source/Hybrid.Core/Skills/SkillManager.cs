@@ -23,9 +23,9 @@ public class SkillManager
         { "Four Arms", typeof(FourArmsSkill) },
         { "Slow Spores", typeof(SlowSporesSkill) },
         { "Rage", typeof(RageSkill) },
-        { "Amotoxic Flesh", typeof(AmotoxicFleshSkill )},
-        { "Raptor Legs", typeof(RaptorLegsSkill )},
-        { "Honeycomb Cells", typeof(HoneycombCellsSkill )},
+        { "Amotoxic Flesh", typeof(AmotoxicFleshSkill) },
+        { "Raptor Legs", typeof(RaptorLegsSkill) },
+        { "Honeycomb Cells", typeof(HoneycombCellsSkill) },
         // Monster-only
         { "Burn", typeof(BurnSkill) },
     };
