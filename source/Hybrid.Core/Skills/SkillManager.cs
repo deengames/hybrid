@@ -26,6 +26,7 @@ public class SkillManager
         { "Amotoxic Flesh", typeof(AmotoxicFleshSkill) },
         { "Raptor Legs", typeof(RaptorLegsSkill) },
         { "Honeycomb Cells", typeof(HoneycombCellsSkill) },
+        { "Shadow Affinity", typeof(ShadowAffinitySkill) },
         // Monster-only
         { "Burn", typeof(BurnSkill) },
     };
@@ -129,6 +130,18 @@ public class SkillManager
         }
 
         return message.ToString();
+    }
+
+    public string OnDescend(Character.Player player)
+    {
+        var message = new StringBuilder();
+        foreach (var skillName in player.Skills)
+        {
+            var skill = GetSkillImplementation(skillName);
+            message.Append(skill.OnDescend(player));
+        }
+
+        return message.ToString(); 
     }
 
     private BaseSkill GetSkillImplementation(string skillName)

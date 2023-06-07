@@ -97,6 +97,14 @@ public static class PlayerSkillsData
             Effect = $"Deals {HoneycombCellsSkill.DamageOnCharge} damage to all monsters after you get hit {HoneycombCellsSkill.HitsToCharge} times",
             Description = "Your cells reshape themselves into honeycombs and absorb kinetic energy",
             LearningCost = 1,
+        },
+        new SkillData
+        {
+            Name = "Shadow Affinity",
+            Species = "Grue",
+            Effect = "Heals 50% of your health when you descend to the next floor",
+            Description = "You blend into passing shadows, the darkness repairing your damaged organs",
+            LearningCost = 2
         }
         // Monster-only: none so far (that need to be here)
     };

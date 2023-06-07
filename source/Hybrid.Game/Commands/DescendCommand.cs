@@ -1,5 +1,6 @@
 using Hybrid.Core.Dungeon;
 using Hybrid.Core.Dungeon.Generators;
+using Hybrid.Core.Skills;
 using Hybrid.Game;
 using Hybrid.Game.Commands;
 using Hybrid.Game.IO;
@@ -27,6 +28,9 @@ class DescendCommand : ICommand
 
             Game.Instance.CurrentFloor = FloorGenerator.Generate(currentFloor.FloorNumber + 1);
             AnsiConsole.MarkupLine($"You descend to [{Colours.ThemeHighlight}]{Game.Instance.CurrentFloor.FloorNumber}B[/].");
+            AnsiConsole.MarkupLine(SkillManager.Instance.OnDescend(Game.Instance.Player)
+                .Replace("[highlight]", $"[{Colours.ThemeHighlight}]")
+                .Replace("[dark]", $"[{Colours.ThemeDark}]"));
             
             if (FeatureToggles.LevelUpOnDescend)
             {

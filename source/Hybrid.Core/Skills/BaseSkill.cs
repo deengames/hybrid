@@ -39,4 +39,10 @@ abstract class BaseSkill
     {
         return string.Empty;
     }
+
+    // Ah, Shadow Affinity, ah.
+    public virtual string OnDescend(Player player)
+    {
+        return string.Empty;
+    }
 }
