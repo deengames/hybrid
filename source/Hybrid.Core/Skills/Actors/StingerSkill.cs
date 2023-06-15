@@ -1,4 +1,5 @@
 using Hybrid.Core.Character;
+using Hybrid.Core.Skills.Player;
 
 namespace Hybrid.Core.Skills.Actors;
 

@@ -2,7 +2,7 @@ using System.Text;
 using Hybrid.Core.Character;
 using Hybrid.Core.Monsters;
 
-namespace Hybrid.Core.Skills;
+namespace Hybrid.Core.Skills.Player;
 
 // Shared venom for Stinger and Amotoxic Flesh
 public static class VenomManager
