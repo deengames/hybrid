@@ -27,6 +27,7 @@ public class SkillManager
         { "Raptor Legs", typeof(RaptorLegsSkill) },
         { "Honeycomb Cells", typeof(HoneycombCellsSkill) },
         { "Shadow Affinity", typeof(ShadowAffinitySkill) },
+        { "Ink", typeof(SquidInkSkill)},
         // Monster-only
         { "Burn", typeof(BurnSkill) },
     };

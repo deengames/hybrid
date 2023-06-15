@@ -105,6 +105,14 @@ public static class PlayerSkillsData
             Effect = "Heals 50% of your health when you descend to the next floor",
             Description = "You blend into passing shadows, the darkness repairing your damaged organs",
             LearningCost = 2
+        },
+        new SkillData
+        {
+            Name = "Ink",
+            Species = "Cephalopod", // squid
+            Effect = "Each round, one enemy is inked, increasing the  chance of missing an attack by 20%",
+            Description = "You develop ink sacs that can spray jet-blank ink at high pressures",
+            LearningCost = 2
         }
         // Monster-only: none so far (that need to be here)
     };
